@@ -1,17 +1,17 @@
 module.exports = {
   root: true,
   extends: [
-    'airbnb',
     '@react-native-community',
+    'airbnb-typescript',
     'prettier',
+    'prettier/@typescript-eslint',
     'prettier/react',
-    'plugin:prettier/recommended',
-    'eslint-config-prettier',
   ],
   env: {
     jest: true,
   },
   globals: {
+    window: false,
     fetch: false,
   },
   rules: {
@@ -22,5 +22,6 @@ module.exports = {
       },
     ],
   },
+  parser: 'babel-eslint',
   plugins: ['prettier'],
 };
