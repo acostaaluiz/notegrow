@@ -1,19 +1,19 @@
 ---
-to: src/components/<%= type %>/<%= Name %>/<%= Name %>.tsx
+to: src/components/<%= type %>/<%= h.changeCase.pascalCase(name) %>/<%= h.changeCase.pascalCase(name) %>.tsx
 ---
 import React from 'react';
 import { Text } from 'react-native';
 
-interface <%= Name %>Props {
+interface <%= h.changeCase.pascalCase(name) %>Props {
   text: string;
 }
 
-function <%= Name %>({ text }: <%= Name %>Props) {
+function <%= h.changeCase.pascalCase(name) %>({ text }: <%= h.changeCase.pascalCase(name) %>Props) {
   return <Text>{text}</Text>;
 }
 
-<%= Name %>.defaultProps = {
+<%= h.changeCase.pascalCase(name) %>.defaultProps = {
   text: 'Hello World',
-} as Partial<<%= Name %>Props>;
+} as Partial<<%= h.changeCase.pascalCase(name) %>Props>;
 
-export default <%= Name %>;
+export default <%= h.changeCase.pascalCase(name) %>;

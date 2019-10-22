@@ -1,5 +1,5 @@
 ---
-to: src/components/<%= type %>/<%= Name %>/index.ts
+to: src/components/<%= type %>/<%= h.changeCase.pascalCase(name) %>/index.ts
 ---
-import <%= Name %> from './<%= Name %>';
-export default <%= Name %>;
+import <%= h.changeCase.pascalCase(name) %> from './<%= h.changeCase.pascalCase(name) %>';
+export default <%= h.changeCase.pascalCase(name) %>;
