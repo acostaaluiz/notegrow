@@ -1,5 +1,5 @@
-import HomeActions from './HomeActions';
+import * as UserActions from './UserActions';
 
 export default {
-  ...HomeActions,
+  ...UserActions,
 };

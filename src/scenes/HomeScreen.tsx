@@ -1,14 +1,22 @@
-import React from 'react';
-import { Text, View } from 'react-native';
-import { useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { Text, View, Button } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from '../store/reducers';
+import { loadUser } from '../store/actions/UserActions';
 
 function HomeScreen() {
-  const result = useSelector(({ home }: AppState) => home);
+  const { pending } = useSelector(({ user }: AppState) => user);
+  const dispatch = useDispatch();
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>HomeStore: {JSON.stringify(result)}</Text>
+      {pending && <Text>Carregando</Text>}
+      <Button
+        title="Fetch"
+        onPress={() => {
+          loadUser(dispatch);
+        }}
+      />
     </View>
   );
 }
