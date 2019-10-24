@@ -17,17 +17,19 @@ function userFetchSuccess(user: UserInterface) {
   }
 }
 
-export async function loadUser(dispatch: Dispatch) {
-  dispatch(userFetchPending())
+export function loadUser(dispatch: Dispatch) {
+  return async (username: string, password: string) => {
+    dispatch(userFetchPending())
 
-  const data = await login('112312', '12321321');
-  const user = UserModel(data);
+    const data = await login(username, password);
+    const user = UserModel(data);
 
-  if (user) {
-    dispatch(userFetchSuccess(user))
-  }
-  else {
-    // ...
+    if (user) {
+      dispatch(userFetchSuccess(user))
+    }
+    else {
+      // ...
+    }
   }
 }
 
