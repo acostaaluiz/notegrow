@@ -1,28 +1,29 @@
-import React, { useState } from 'react';
-import { Text, View, Button } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, Text, Button } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from '../store/reducers';
-import { loadUser } from '../store/actions/UserActions';
+import { NavigationPageProp } from '../interfaces/navigation';
+import { logoffUser } from '../store/actions/UserActions';
+import { HomeTemplate } from '../components/templates';
+import { AuthGuard } from '../components/utils';
 
-function HomeScreen() {
-  const { pending, data } = useSelector(({ user }: AppState) => user);
+interface HomeScreenProps {
+  navigation: NavigationPageProp;
+}
+
+function HomeScreen({ navigation }: HomeScreenProps) {
+  const user = useSelector(({ user }: AppState) => user.data);
   const dispatch = useDispatch();
+  const onLogoff = () => logoffUser(dispatch);
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      {pending && <Text>Carregando</Text>}
-      {data ? (
-        <Text>Dados do usuário: {JSON.stringify(data)}</Text>
-      ) : (
-        <Text>Não existem dados do usuário</Text>
-      )}
-      <Button
-        title="Fetch"
-        onPress={() => {
-          loadUser(dispatch);
-        }}
+    <AuthGuard navigation={navigation}>
+      <HomeTemplate
+        pageName={(navigation.state as any).routeName}
+        user={user!}
+        onLogoff={onLogoff}
       />
-    </View>
+    </AuthGuard>
   );
 }
 

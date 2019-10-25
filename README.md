@@ -136,6 +136,16 @@ Temos os seguintes comandos:
 
 Ele gerará o componente para você e incluirá na dependência do tipo de componente que você escolheu.
 
+### Devtools
+
+O Devtools (v3) funciona como uma aplicação de debug (que trabalha em conjunto com o próprio debug do react native), que permite utilizar a função de Inspect e retornar a árvore de componentes da aplicação
+
+Para incializar, execute o comando:
+
+`yarn devtools`
+
+E na aplicação, entre no menu de desenvolvedor (CMD + D no iOS e CMD + M no Android) e habilite o Debug. Ele irá se conectar, mas não necessariamente você precisa utiliza-lo agora, pois como foi dito, a unica função real dele é de inspecionar elementos. Para poder fazer isso, entre novamente no menu de desenvolvedor e habilite o Inspect
+
 ## Desenvolvendo
 
 ### Variáveis de ambiente
@@ -219,9 +229,10 @@ O processo de build do iOS pode ser encontrado na [site da documentação do Rea
 
   - Gerenciamento de variáveis de ambiente para cada ambiente
 
+<!--
 - i18n-js
 
-  - Biblioteca de internacionalização e de tradução de conteúdo
+  - Biblioteca de internacionalização e de tradução de conteúdo -->
 
 - react-native-localize
 
@@ -234,6 +245,14 @@ O processo de build do iOS pode ser encontrado na [site da documentação do Rea
 <!-- - react-native-vector-icons
 
   - Ícones Open Source e customizáveis para React Native -->
+
+- react-native-offline
+
+  - Biblioteca responsável por armazenar requests quando a aplicação está offline. **Ainda não está completamente configurada**
+
+- redux-persist
+
+  - Biblioteca responsável por armazenar informações do Redux no AsyncStorage, e por fazer hidratação desses dados quando a aplicação incializa (por exemplo, manter a API_KEY, os dados do usuário, etc).
 
 - hygen
 

@@ -1,6 +1,6 @@
 import { UserInterface } from '../../models/users';
 import { ActionPayload } from '../../interfaces/redux';
-import { USER_FETCH_PENDING, USER_FETCH_SUCCESS } from '../types';
+import { USER_FETCH_PENDING, USER_FETCH_SUCCESS, USER_LOGOFF } from '../types';
 
 interface UserReducerState {
   pending: boolean;
@@ -30,6 +30,8 @@ function UserReducer(state = INITIAL_STATE, action: ActionPayload<UserInterface>
         pending: false,
         data: action.payload
       }
+    case USER_LOGOFF:
+      return { ...INITIAL_STATE }
     default:
       return state
   }

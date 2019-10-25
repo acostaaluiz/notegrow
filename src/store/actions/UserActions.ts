@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 import { ActionPayload } from '../../interfaces/redux';
-import { USER_FETCH_PENDING, USER_FETCH_SUCCESS } from '../types';
+import { USER_FETCH_PENDING, USER_FETCH_SUCCESS, USER_LOGOFF } from '../types';
 import { login } from '../../services/user';
 import UserModel, { UserInterface } from '../../models/users';
 
@@ -17,17 +17,29 @@ function userFetchSuccess(user: UserInterface) {
   }
 }
 
-export async function loadUser(dispatch: Dispatch) {
-  dispatch(userFetchPending())
-
-  const data = await login('112312', '12321321');
-  const user = UserModel(data);
-
-  if (user) {
-    dispatch(userFetchSuccess(user))
+function userLogoff() {
+  return {
+    type: USER_LOGOFF
   }
-  else {
-    // ...
+}
+
+export function loadUser(dispatch: Dispatch) {
+  return async (username: string, password: string) => {
+    dispatch(userFetchPending())
+
+    const data = await login(username, password);
+    const user = UserModel(data);
+
+    if (user) {
+      dispatch(userFetchSuccess(user))
+    }
+    else {
+      // ...
+    }
   }
+}
+
+export function logoffUser(dispatch: Dispatch) {
+  dispatch(userLogoff())
 }
 
