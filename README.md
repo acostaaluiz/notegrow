@@ -229,9 +229,10 @@ O processo de build do iOS pode ser encontrado na [site da documentação do Rea
 
   - Gerenciamento de variáveis de ambiente para cada ambiente
 
+<!--
 - i18n-js
 
-  - Biblioteca de internacionalização e de tradução de conteúdo
+  - Biblioteca de internacionalização e de tradução de conteúdo -->
 
 - react-native-localize
 
@@ -244,6 +245,14 @@ O processo de build do iOS pode ser encontrado na [site da documentação do Rea
 <!-- - react-native-vector-icons
 
   - Ícones Open Source e customizáveis para React Native -->
+
+- react-native-offline
+
+  - Biblioteca responsável por armazenar requests quando a aplicação está offline. **Ainda não está completamente configurada**
+
+- redux-persist
+
+  - Biblioteca responsável por armazenar informações do Redux no AsyncStorage, e por fazer hidratação desses dados quando a aplicação incializa (por exemplo, manter a API_KEY, os dados do usuário, etc).
 
 - hygen
 
