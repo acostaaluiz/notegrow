@@ -2,8 +2,8 @@ import { compose, createStore, applyMiddleware } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist'
 import ReduxThunk from 'redux-thunk';
 import { createNetworkMiddleware } from 'react-native-offline';
+import AsyncStorage from '@react-native-community/async-storage';
 import reducers from './reducers';
-import { AsyncStorage } from 'react-native';
 
 const composeEnhancers =
   (<any>window).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
