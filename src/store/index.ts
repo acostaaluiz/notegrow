@@ -1,7 +1,9 @@
 import { compose, createStore, applyMiddleware } from 'redux';
+import { persistStore, persistReducer } from 'redux-persist'
 import ReduxThunk from 'redux-thunk';
 import { createNetworkMiddleware } from 'react-native-offline';
 import reducers from './reducers';
+import { AsyncStorage } from 'react-native';
 
 const composeEnhancers =
   (<any>window).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -10,9 +12,16 @@ const networkMiddleware = createNetworkMiddleware({
   queueReleaseThrottle: 200,
 });
 
-const store = createStore(
-  reducers,
+const persistedReducer = persistReducer({
+  key: 'root',
+  storage: AsyncStorage,
+  whitelist: ['user']
+}, reducers)
+
+export const store = createStore(
+  persistedReducer,
   composeEnhancers(applyMiddleware(ReduxThunk, networkMiddleware)),
 );
 
-export default store;
+export const persisted = persistStore(store);
+
