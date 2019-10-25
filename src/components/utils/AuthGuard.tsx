@@ -15,7 +15,6 @@ function AuthGuard({
   const user = useSelector(({ user }: AppState) => user.data);
   useEffect(() => {
     if (!user) {
-      console.log('wa');
       navigation.navigate('Login');
     }
   }, [user]);

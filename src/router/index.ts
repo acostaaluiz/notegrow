@@ -5,7 +5,6 @@ import LoginScreen from '../scenes/LoginScreen';
 import AppOpened from '../scenes/AppOpened';
 import HomeScreen from '../scenes/HomeScreen';
 
-
 const HomeNavigator = createBottomTabNavigator({
   Home: {
     screen: HomeScreen
