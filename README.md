@@ -136,6 +136,16 @@ Temos os seguintes comandos:
 
 Ele gerará o componente para você e incluirá na dependência do tipo de componente que você escolheu.
 
+### Devtools
+
+O Devtools (v3) funciona como uma aplicação de debug (que trabalha em conjunto com o próprio debug do react native), que permite utilizar a função de Inspect e retornar a árvore de componentes da aplicação
+
+Para incializar, execute o comando:
+
+`yarn devtools`
+
+E na aplicação, entre no menu de desenvolvedor (CMD + D no iOS e CMD + M no Android) e habilite o Debug. Ele irá se conectar, mas não necessariamente você precisa utiliza-lo agora, pois como foi dito, a unica função real dele é de inspecionar elementos. Para poder fazer isso, entre novamente no menu de desenvolvedor e habilite o Inspect
+
 ## Desenvolvendo
 
 ### Variáveis de ambiente
