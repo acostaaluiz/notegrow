@@ -5,6 +5,7 @@ import { AppState } from '../store/reducers';
 import { NavigationPageProp } from '../interfaces/navigation';
 import { logoffUser } from '../store/actions/UserActions';
 import { HomeTemplate } from '../components/templates';
+import { AuthGuard } from '../components/utils';
 
 interface HomeScreenProps {
   navigation: NavigationPageProp;
@@ -15,20 +16,14 @@ function HomeScreen({ navigation }: HomeScreenProps) {
   const dispatch = useDispatch();
   const onLogoff = () => logoffUser(dispatch);
 
-  useEffect(() => {
-    if (!user) {
-      navigation.navigate('Login');
-    }
-  }, [user]);
-
-  if (!user) return null;
-
   return (
-    <HomeTemplate
-      pageName={(navigation.state as any).routeName}
-      user={user}
-      onLogoff={onLogoff}
-    />
+    <AuthGuard navigation={navigation}>
+      <HomeTemplate
+        pageName={(navigation.state as any).routeName}
+        user={user!}
+        onLogoff={onLogoff}
+      />
+    </AuthGuard>
   );
 }
 
