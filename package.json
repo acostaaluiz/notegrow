@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "pod:install": "cd ios && pod install",
     "generate": "hygen",
-    "devtools": "react-devtools"
+    "devtools": "react-devtools",
+    "storybook": "start-storybook -p 7007"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.6.2",
@@ -43,9 +44,17 @@
     "@babel/core": "^7.6.4",
     "@babel/runtime": "^7.6.3",
     "@react-native-community/eslint-config": "^0.0.5",
+    "@storybook/addon-actions": "^5.2.5",
+    "@storybook/addon-info": "^5.2.5",
+    "@storybook/addon-links": "^5.2.5",
+    "@storybook/addons": "^5.2.5",
+    "@storybook/react-native": "^5.2.5",
+    "@storybook/react-native-server": "^5.2.5",
     "@typescript-eslint/eslint-plugin": "^2.5.0",
+    "awesome-typescript-loader": "^5.2.1",
     "babel-eslint": "^10.0.3",
     "babel-jest": "^24.9.0",
+    "babel-loader": "^8.0.6",
     "eslint": "^6.5.1",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-airbnb-typescript": "^5.0.0",
@@ -58,6 +67,8 @@
     "jest": "^24.9.0",
     "metro-react-native-babel-preset": "^0.56.0",
     "prettier": "^1.18.2",
+    "react-docgen-typescript-loader": "^3.3.0",
+    "react-dom": "16.9.0",
     "react-test-renderer": "16.9.0"
   },
   "jest": {
