@@ -3,8 +3,9 @@ import { ActionPayload } from '../../interfaces/redux';
 import { USER_FETCH_PENDING, USER_FETCH_SUCCESS, USER_LOGOFF, USER_SAVEPREFERENCES_PENDING, USER_SAVEPREFERENCES_SUCCESS, USER_SAVEPREFERENCES_ERROR } from '../types';
 import { login } from '../../services/user';
 import UserModel, { UserInterface } from '../../models/users';
+import { UserReducerState } from '../reducers/UserReducer';
 
-export type HomeActionTypes = ActionPayload<number[]>;
+export type HomeActionTypes = ActionPayload<UserReducerState>;
 
 function userFetchPending() {
   return { type: USER_FETCH_PENDING }
