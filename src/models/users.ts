@@ -6,6 +6,9 @@ export interface UserInterface {
   name: string;
   email: string;
   key: string;
+  state: string;
+  city: string;
+  center: string;
 }
 
 export default function UserModel(data: any | UserInterface): UserInterface | null {
@@ -17,5 +20,8 @@ export default function UserModel(data: any | UserInterface): UserInterface | nu
     name: data.name || '',
     email: data.email || '',
     key: data.key || '',
+    state: data.state || '',
+    city: data.city || '',
+    center: data.center || '',
   };
 }
