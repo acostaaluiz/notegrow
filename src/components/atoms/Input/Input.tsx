@@ -1,6 +1,5 @@
 import React, { MutableRefObject } from 'react';
-import { TextInputProperties, TextStyle } from 'react-native';
-import { StyledInput } from './Input.styles';
+import { Text, TextInput, TextInputProperties, TextStyle } from 'react-native';
 
 interface InputProps extends TextInputProperties {
   value: string;
@@ -12,10 +11,18 @@ interface InputProps extends TextInputProperties {
 function Input({ value, onChangeText, style, innerref, ...props }: InputProps) {
   const overloadStyle = style || {};
   return (
-    <StyledInput
+    <TextInput
       ref={innerref}
       {...props}
-      style={overloadStyle}
+      style={{
+        height: 40,
+        borderColor: 'gray',
+        borderWidth: 1,
+        width: '100%',
+        paddingLeft: 10,
+        paddingRight: 10,
+        ...overloadStyle,
+      }}
       onChangeText={text => onChangeText(text)}
       value={value}
     />
@@ -24,7 +31,7 @@ function Input({ value, onChangeText, style, innerref, ...props }: InputProps) {
 
 Input.defaultProps = {
   value: '',
-  onChangeText(text: string) {},
+  onChangeText(text: string) { },
 } as Partial<InputProps>;
 
 export default Input;
