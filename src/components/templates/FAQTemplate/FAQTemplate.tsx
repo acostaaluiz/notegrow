@@ -9,9 +9,6 @@ interface FAQTemplateProps {
 }
 
 function ListTemplate({ pending, faq }: FAQTemplateProps) {
-
-    console.log('################################################################## pending: ' + String(pending))
-
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             {pending && <Text>Loading FAQ...</Text>}

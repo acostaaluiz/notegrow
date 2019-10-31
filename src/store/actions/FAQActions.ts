@@ -25,8 +25,6 @@ export function loadFAQList(dispatch: Dispatch) {
         const data = getMockFAQ();
         const faq = FAQModel(data);
 
-        console.log(' faq: ############# ############# ############# #############' + JSON.stringify(data));
-
         if (faq) {
             dispatch(FAQFetchSuccess(data))
         }
