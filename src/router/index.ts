@@ -5,6 +5,7 @@ import LoginScreen from '../scenes/LoginScreen';
 import AppOpened from '../scenes/AppOpened';
 import HomeScreen from '../scenes/HomeScreen';
 import UserPreferences from '../scenes/UserPreferencesScreen';
+import FAQScreen from '../scenes/FAQScreen';
 
 const HomeNavigator = createBottomTabNavigator({
   Home: {
@@ -27,10 +28,17 @@ const LoginNavigator = createStackNavigator({
   }
 });
 
+const FAQNavigator = createStackNavigator({
+  FAQ: {
+    screen: FAQScreen,
+  }
+});
+
 const AppNavigator = createSwitchNavigator({
   AppOpened: AppOpened,
   Login: LoginNavigator,
-  Home: HomeNavigator
+  Home: HomeNavigator,
+  FAQ: FAQNavigator
 }, { initialRouteName: 'AppOpened' });
 
 export default createAppContainer(AppNavigator);
