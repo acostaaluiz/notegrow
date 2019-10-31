@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import LoginScreen from '../scenes/LoginScreen';
 import AppOpened from '../scenes/AppOpened';
 import HomeScreen from '../scenes/HomeScreen';
+import UserPreferences from '../scenes/UserPreferencesScreen';
 import FAQScreen from '../scenes/FAQScreen';
 
 const HomeNavigator = createBottomTabNavigator({
@@ -13,8 +14,11 @@ const HomeNavigator = createBottomTabNavigator({
   Screen2: {
     screen: HomeScreen,
   },
-  Screen3: {
-    screen: HomeScreen,
+  Preferences: {
+    screen: UserPreferences,
+    navigationOptions: {
+      tabBarLabel: 'Preferências'
+    }
   },
 }, { initialRouteName: 'Home' })
 
