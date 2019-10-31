@@ -1,6 +1,7 @@
 import React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
 import { UserInterface } from '../../../models/users';
+import { Button } from '../../atoms';
 
 interface HomeTemplateProps {
   pageName: string;
@@ -13,7 +14,8 @@ function HomeTemplate({ pageName, user, onLogoff }: HomeTemplateProps) {
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text style={{ fontSize: 24 }}>{pageName}</Text>
       <Text style={{ fontSize: 32, fontWeight: 'bold' }}>{user.name}</Text>
-      <Button title="Logoff" onPress={onLogoff} />
+      {/* <Button title="Logoff" onPress={onLogoff} /> */}
+      <Button title="Ok, entendi" />
     </View>
   );
 }
