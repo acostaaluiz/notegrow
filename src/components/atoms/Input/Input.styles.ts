@@ -18,6 +18,5 @@ export const StyledText = styled.Text<{ error?: boolean }>`
   width: 100%;
   padding: 0 3px;
   margin-left: 16px;
-  font-size: 12px;
   color: ${(props) => props.error ? colors.red.primary : colors.blue.primary};
 `;
