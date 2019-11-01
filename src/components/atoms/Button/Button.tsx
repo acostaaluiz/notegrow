@@ -22,7 +22,7 @@ type ButtonType = ButtonInternalProps &
   TouchProps &
   TouchableWithoutFeedbackProps;
 
-interface TouchableType extends ButtonType {
+interface TouchableType extends TouchProps, TouchableWithoutFeedbackProps {
   internal: ReactNode;
 }
 

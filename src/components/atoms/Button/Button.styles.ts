@@ -7,6 +7,7 @@ export interface TouchProps {
   inline?: boolean;
   disabled?: boolean;
   secondary?: boolean;
+  dark?: boolean;
 }
 
 interface ButtonThemeProps {
@@ -26,15 +27,19 @@ export const TouchAndroid = styled.TouchableNativeFeedback<TouchProps>`
   ${touchBase}
 `;
 
-const renderButtonStyle = (secondary: boolean | undefined, disabled: boolean | undefined) => {
+const renderButtonStyle = (secondary: boolean | undefined, disabled: boolean | undefined, dark: boolean | undefined) => {
   if (secondary) {
+    let borderColor = colors.blue.secondary;
+    if (disabled) {
+      borderColor = dark ? colors.fontColorDark.inactive : colors.fontColor.inactive
+    }
     return `
       background: transparent;
-      border: 2px solid ${disabled ? colors.fontColor.inactive : colors.blue.secondary};
+      border: 2px solid ${borderColor};
     `
   }
   return `
-    background: ${disabled ? '#e0e0e0' : colors.blue.secondary};
+    background: ${disabled ? colors.fontColor.disabled : colors.blue.secondary};
   `
 }
 
@@ -43,14 +48,17 @@ export const ButtonContainer = styled.View`
   align-items: center;
   padding: 24px 16px;
   ${touchBase}
-  ${({ theme: { secondary, disabled } }: ButtonThemeProps) => renderButtonStyle(secondary, disabled)};
+  ${({ theme: { secondary, disabled, dark } }: ButtonThemeProps) => renderButtonStyle(secondary, disabled, dark)};
 `;
 
-const renderTextStyle = (secondary: boolean | undefined, disabled: boolean | undefined) => {
+const renderTextStyle = (secondary: boolean | undefined, disabled: boolean | undefined, dark: boolean | undefined) => {
   if (disabled) {
-    return colors.fontColor.inactive;
+    return dark ? colors.fontColorDark.inactive : colors.fontColor.inactive;
   }
-  return secondary ? colors.blue.primary : colors.fontColorDark.active;
+  if (!secondary || secondary && dark) {
+    return colors.fontColorDark.active
+  }
+  return colors.blue.primary;
 }
 
 export const ButtonText = styled.Text`
@@ -59,5 +67,5 @@ export const ButtonText = styled.Text`
   letter-spacing: 0.5;
   line-height: 16px;
   text-align: center;
-  color: ${({ theme: { disabled, secondary } }: ButtonThemeProps) => renderTextStyle(secondary, disabled)};
+  color: ${({ theme: { disabled, secondary, dark } }: ButtonThemeProps) => renderTextStyle(secondary, disabled, dark)};
 `;

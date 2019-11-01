@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import { UserInterface } from '../../../models/users';
 import { Button } from '../../atoms';
+import { ThemeProvider } from 'styled-components';
 
 interface HomeTemplateProps {
   pageName: string;
@@ -11,17 +12,31 @@ interface HomeTemplateProps {
 
 function HomeTemplate({ pageName, user, onLogoff }: HomeTemplateProps) {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'black',
+      }}>
       <Text style={{ fontSize: 24 }}>{pageName}</Text>
       <Text style={{ fontSize: 32, fontWeight: 'bold' }}>{user.name}</Text>
       {/* <Button title="Logoff" onPress={onLogoff} /> */}
-      <Button title="Ok, entendi" secondary onPress={() => console.log('wa')} />
-      <Button
-        title="Ok, entendi"
-        secondary
-        disabled
-        onPress={() => console.log('wa')}
-      />
+      <ThemeProvider theme={{ dark: true }}>
+        <>
+          <Button
+            title="Ok, entendi"
+            secondary
+            onPress={() => console.log('wa')}
+          />
+          <Button
+            title="Ok, entendi"
+            secondary
+            disabled
+            onPress={() => console.log('wa')}
+          />
+        </>
+      </ThemeProvider>
     </View>
   );
 }
