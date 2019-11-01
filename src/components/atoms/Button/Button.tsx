@@ -16,36 +16,33 @@ import colors from '../../../styles/colors';
 
 interface ButtonInternalProps {
   title: string;
-  disabled?: boolean;
 }
 
 type ButtonType = ButtonInternalProps &
   TouchProps &
   TouchableWithoutFeedbackProps;
 
-interface TouchableType extends TouchableWithoutFeedbackProps {
+interface TouchableType extends ButtonType {
   internal: ReactNode;
 }
 
-function TouchableContainer({ internal, ...props }: TouchableType) {
+function TouchableContainer({ internal, secondary, ...props }: TouchableType) {
   if (Platform.OS === 'ios') {
-    return (
-      <TouchIOS underlayColor="white" {...props}>
-        {internal}
-      </TouchIOS>
-    );
+    return <TouchIOS {...props}>{internal}</TouchIOS>;
   }
   return (
     <TouchAndroid
       {...props}
-      background={TouchableNativeFeedback.Ripple('white')}>
+      background={TouchableNativeFeedback.Ripple(
+        secondary ? colors.blue.secondary : colors.fontColorDark.active,
+      )}>
       {internal}
     </TouchAndroid>
   );
 }
 
 function Button({ title, width, inline, ...props }: ButtonType) {
-  const { disabled } = props;
+  const { disabled, secondary } = props;
 
   // Can't use internal as an external component because
   // of a TouchableNativeFeedback bug with styled components
@@ -56,7 +53,7 @@ function Button({ title, width, inline, ...props }: ButtonType) {
   );
 
   return (
-    <ThemeProvider theme={{ disabled, inline, width }}>
+    <ThemeProvider theme={{ disabled, inline, width, secondary }}>
       <TouchableContainer internal={internal} {...props} />
     </ThemeProvider>
   );
