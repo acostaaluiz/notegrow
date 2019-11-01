@@ -28,7 +28,7 @@ function Input({ value, onChangeText, style, innerref, error, assistiveText, edi
         focus={focus}
         error={error}
         editable={editable}
-        placeholderTextColor={editable ? colors.inputFocus.active : colors.fontColor.inactive}
+        placeholderTextColor={editable ? colors.fontColor.active : colors.fontColor.inactive}
       />
       <StyledText
         ref={innerref}
