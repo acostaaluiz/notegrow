@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { PropsWithChildren, ReactNode } from 'react';
 import {
   Platform,
-  View,
-  TouchableOpacityProps,
-  TouchableNativeFeedbackProps,
+  TouchableWithoutFeedbackProps,
+  TouchableNativeFeedback,
 } from 'react-native';
 import {
   ButtonContainer,
@@ -13,54 +12,52 @@ import {
   TouchProps,
 } from './Button.styles';
 import { ThemeProvider } from 'styled-components';
-
-type TouchType = TouchableOpacityProps | TouchableNativeFeedbackProps;
+import colors from '../../../styles/colors';
 
 interface ButtonInternalProps {
   title: string;
-}
-
-interface ButtonProps extends ButtonInternalProps, TouchProps {
   disabled?: boolean;
-  inactive?: boolean;
 }
 
-type ButtonType = ButtonProps;
+type ButtonType = ButtonInternalProps &
+  TouchProps &
+  TouchableWithoutFeedbackProps;
 
-function ButtonInternal({ title }: ButtonInternalProps) {
-  return (
-    <ButtonContainer>
-      <ButtonText>{title}</ButtonText>
-    </ButtonContainer>
-  );
+interface TouchableType extends TouchableWithoutFeedbackProps {
+  internal: ReactNode;
 }
 
-function ButtonView({ title, ...props }: ButtonType) {
-  if (Platform.OS === 'ios')
-    return (
-      <TouchIOS {...props}>
-        <ButtonInternal title={title} />
-      </TouchIOS>
-    );
-
+function TouchableContainer({ internal, ...props }: TouchableType) {
+  if (Platform.OS === 'ios') {
+    return <TouchIOS {...props}>{internal}</TouchIOS>;
+  }
   return (
-    <TouchAndroid {...props}>
-      <ButtonInternal title={title} />
+    <TouchAndroid
+      {...props}
+      background={TouchableNativeFeedback.Ripple('white')}>
+      {internal}
     </TouchAndroid>
   );
 }
 
-function Button(props: ButtonType) {
-  const { inactive, disabled } = props;
+function Button({ title, ...props }: ButtonType) {
+  const { disabled, inline } = props;
+
+  const internal = (
+    <ButtonContainer>
+      <ButtonText>{title}</ButtonText>
+    </ButtonContainer>
+  );
+
   return (
-    <ThemeProvider theme={{ inactive, disabled }}>
-      <ButtonView {...props} />
+    <ThemeProvider theme={{ disabled, inline }}>
+      <TouchableContainer internal={internal} {...props} />
     </ThemeProvider>
   );
 }
 
 Button.defaultProps = {
-  text: 'Hello World',
+  title: 'Hello World',
 } as Partial<ButtonType>;
 
 export default Button;

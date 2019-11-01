@@ -15,7 +15,7 @@ function HomeTemplate({ pageName, user, onLogoff }: HomeTemplateProps) {
       <Text style={{ fontSize: 24 }}>{pageName}</Text>
       <Text style={{ fontSize: 32, fontWeight: 'bold' }}>{user.name}</Text>
       {/* <Button title="Logoff" onPress={onLogoff} /> */}
-      <Button title="Ok, entendi" />
+      <Button title="Ok, entendi" onPress={() => console.log('wa')} />
     </View>
   );
 }
