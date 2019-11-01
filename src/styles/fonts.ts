@@ -3,7 +3,7 @@ export const fonts = {
   roboto: 'Roboto-Regular'
 }
 
-export const styledfont = {
+const styledfont = {
   h1: `
     font-family: ${fonts.votorantim};
     font-size: 56px;
@@ -68,3 +68,5 @@ export const styledfont = {
     line-height: 20px;
   `,
 }
+
+export default styledfont;
