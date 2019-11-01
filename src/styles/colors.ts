@@ -25,12 +25,6 @@ export const fontColorDark = {
   disabled: '#7d7e7f'
 }
 
-export const inputFocus = {
-  active: '#FFFFFF',
-  inactive: '#9f9fa0',
-  disabled: '#7d7e7f'
-}
-
 export const comomColors = {
 }
 
