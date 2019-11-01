@@ -29,7 +29,11 @@ interface TouchableType extends TouchableWithoutFeedbackProps {
 
 function TouchableContainer({ internal, ...props }: TouchableType) {
   if (Platform.OS === 'ios') {
-    return <TouchIOS {...props}>{internal}</TouchIOS>;
+    return (
+      <TouchIOS underlayColor="white" {...props}>
+        {internal}
+      </TouchIOS>
+    );
   }
   return (
     <TouchAndroid
@@ -40,9 +44,11 @@ function TouchableContainer({ internal, ...props }: TouchableType) {
   );
 }
 
-function Button({ title, ...props }: ButtonType) {
-  const { disabled, inline } = props;
+function Button({ title, width, inline, ...props }: ButtonType) {
+  const { disabled } = props;
 
+  // Can't use internal as an external component because
+  // of a TouchableNativeFeedback bug with styled components
   const internal = (
     <ButtonContainer>
       <ButtonText>{title}</ButtonText>
@@ -50,7 +56,7 @@ function Button({ title, ...props }: ButtonType) {
   );
 
   return (
-    <ThemeProvider theme={{ disabled, inline }}>
+    <ThemeProvider theme={{ disabled, inline, width }}>
       <TouchableContainer internal={internal} {...props} />
     </ThemeProvider>
   );
