@@ -1,6 +1,8 @@
 import React, { MutableRefObject, useState } from 'react';
 import { TextInputProperties, TextStyle, View, Text } from 'react-native';
 import { StyledInput, StyledText } from './Input.styles';
+import colors from '../../../styles/colors';
+
 interface InputProps extends TextInputProperties {
   value: string;
   onChangeText: (text: string) => void;
@@ -8,8 +10,9 @@ interface InputProps extends TextInputProperties {
   innerref?: MutableRefObject<any>;
   error?: boolean;
   assistiveText?: string;
+  editable: boolean;
 }
-function Input({ value, onChangeText, style, innerref, error, assistiveText, ...props }: InputProps) {
+function Input({ value, onChangeText, style, innerref, error, assistiveText, editable, ...props }: InputProps) {
   const overloadStyle = style || {};
   const [focus, setFocus] = useState(false);
   return (
@@ -24,6 +27,8 @@ function Input({ value, onChangeText, style, innerref, error, assistiveText, ...
         value={value}
         focus={focus}
         error={error}
+        editable={editable}
+        placeholderTextColor={editable ? colors.fontColor.active : colors.fontColor.inactive}
       />
       <StyledText
         ref={innerref}
