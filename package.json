@@ -12,6 +12,7 @@
     "generate": "hygen",
     "devtools": "react-devtools",
     "asset": "react-native-asset",
+    "prestorybook": "rnstl",
     "storybook": "start-storybook -p 7007"
   },
   "dependencies": {
@@ -75,10 +76,20 @@
     "react-docgen-typescript-loader": "^3.3.0",
     "react-dom": "16.9.0",
     "react-native-asset": "^2.0.0",
-    "react-test-renderer": "16.9.0",
-    "require-context.macro": "^1.2.2"
+    "react-native-storybook-loader": "^1.8.1",
+    "react-test-renderer": "16.9.0"
   },
   "jest": {
     "preset": "react-native"
+  },
+  "config": {
+    "react-native-storybook-loader": {
+      "searchDir": [
+        "./src",
+        "./packages"
+      ],
+      "pattern": "**/*.stories.tsx",
+      "outputFile": "./storybook/storyLoader.tsx"
+    }
   }
 }

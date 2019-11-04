@@ -1,14 +1,13 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { AppRegistry } from 'react-native';
 import { getStorybookUI, configure } from '@storybook/react-native';
-import requireContext from 'require-context.macro';
+// eslint-disable-next-line import/no-unresolved
+import { loadStories } from './storyLoader';
 
 import './rn-addons';
 
-const req = requireContext('../src', true, /\.stories\.tsx?$/);
-
 // import stories
-configure(() => req.keys().forEach(filename => req(filename)), module);
+configure(() => loadStories(), module);
 
 // Refer to https://github.com/storybookjs/storybook/tree/master/app/react-native#start-command-parameters
 // To find allowed options for getStorybookUI
