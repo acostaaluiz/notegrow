@@ -162,6 +162,15 @@ ENVFILE=.env.staging react-native run-ios
 ENVFILE=.env.production react-native run-ios
 ```
 
+### Adicionando Assets no projeto
+
+Utilizamos o `react-native-asset` para importarmos os assets do projeto.
+As pastas que contém os assets fica dentro do arquivo `react-native.config.js`.
+
+A cada alteração nas pastas dos assets (incluindo ou removendo arquivos), é necessário executar o comando `yarn asset`, que ele sincroniza as alterações das pastas com os projetos nativos.
+
+### Criando componentes estilizados
+
 ## Build
 
 ### Android

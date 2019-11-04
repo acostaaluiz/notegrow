@@ -1,8 +1,8 @@
 import { UserInterface } from '../../models/users';
 import { ActionPayload } from '../../interfaces/redux';
-import { USER_FETCH_PENDING, USER_FETCH_SUCCESS, USER_LOGOFF } from '../types';
+import { USER_FETCH_PENDING, USER_FETCH_SUCCESS, USER_LOGOFF, USER_SAVEPREFERENCES_PENDING, USER_SAVEPREFERENCES_SUCCESS } from '../types';
 
-interface UserReducerState {
+export interface UserReducerState {
   pending: boolean;
   data?: UserInterface;
   error?: string;
@@ -14,7 +14,7 @@ const INITIAL_STATE: UserReducerState = {
   error: undefined
 }
 
-function UserReducer(state = INITIAL_STATE, action: ActionPayload<UserInterface>) {
+function UserReducer(state = INITIAL_STATE, action: ActionPayload<UserInterface | any>) {
   // Estou carregando as informações do usuário
   // Salvar os dados do usuário
   // Deu algum erro
@@ -29,6 +29,22 @@ function UserReducer(state = INITIAL_STATE, action: ActionPayload<UserInterface>
         ...state,
         pending: false,
         data: action.payload
+      }
+    case USER_SAVEPREFERENCES_PENDING:
+      return {
+        ...state,
+        pending: true,
+      }
+    case USER_SAVEPREFERENCES_SUCCESS:
+      return {
+        ...state,
+        pending: false,
+        data: {
+          ...state.data,
+          state: action.payload!.state,
+          city: action.payload!.city,
+          center: action.payload!.center,
+        }
       }
     case USER_LOGOFF:
       return { ...INITIAL_STATE }

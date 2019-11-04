@@ -1,0 +1,565 @@
+[
+  {
+    "state": "Alagoas",
+    "cities": [
+      {
+        "city": "Maceió",
+        "centers": [
+          "CD MACEIO"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Amapá",
+    "cities": [
+      {
+        "city": "Macapá",
+        "centers": [
+          "CD MACAPA"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Amazonas",
+    "cities": [
+      {
+        "city": "Manaus",
+        "centers": [
+          "TERMINAL MANAUS"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Bahia",
+    "cities": [
+      {
+        "city": "Camaçari",
+        "centers": [
+          "FABRICA CAMAÇARI"
+        ]
+      },
+      {
+        "city": "Feira de Santana",
+        "centers": [
+          "CD FEIRA DE SANTANA"
+        ]
+      },
+      {
+        "city": "Itabuna",
+        "centers": [
+          "CD ITABUNA"
+        ]
+      },
+      {
+        "city": "Luis Eduardo Magalhães",
+        "centers": [
+          "CD Luis Eduardo Magalhães"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Ceará",
+    "cities": [
+      {
+        "city": "Caucaia",
+        "centers": [
+          "FABRICA PECEM"
+        ]
+      },
+      {
+        "city": "Fortaleza",
+        "centers": [
+          "CD FORTALEZA (MUCURIPE)"
+        ]
+      },
+      {
+        "city": "Sobral",
+        "centers": [
+          "FABRICA SOBRAL"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Distrito Federal",
+    "cities": [
+      {
+        "city": "Sobradinho",
+        "centers": [
+          "FABRICA SOBRADINHO"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Goiás",
+    "cities": [
+      {
+        "city": "Edealina",
+        "centers": [
+          "FABRICA EDEALINA"
+        ]
+      },
+      {
+        "city": "Goiânia",
+        "centers": [
+          "CD GOIANIA"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Maranhão",
+    "cities": [
+      {
+        "city": "Imperatriz",
+        "centers": [
+          "CD IMPERATRIZ"
+        ]
+      },
+      {
+        "city": "São Luis",
+        "centers": [
+          "FABRICA SAO LUIS"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Mato Grosso",
+    "cities": [
+      {
+        "city": "Cuiabá",
+        "centers": [
+          "FABRICA CUIABÁ"
+        ]
+      },
+      {
+        "city": "Nobres",
+        "centers": [
+          "FABRICA NOBRES"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Mato Grosso do Sul",
+    "cities": [
+      {
+        "city": "Campo Grande",
+        "centers": [
+          "CD CAMPO GRANDE"
+        ]
+      },
+      {
+        "city": "Corumbá",
+        "centers": [
+          "FABRICA CORUMBA"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Minas Gerais",
+    "cities": [
+      {
+        "city": "Itaú de Minas",
+        "centers": [
+          "FABRICA ITAU DE MINAS"
+        ]
+      },
+      {
+        "city": "Três Corações",
+        "centers": [
+          "CD TRES CORAÇOES"
+        ]
+      },
+      {
+        "city": "Uberlândia",
+        "centers": [
+          "CD UBERLÂNDIA"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Pará",
+    "cities": [
+      {
+        "city": "Ananindeua",
+        "centers": [
+          "CD BELEM",
+          "FABRICA BELEM"
+        ]
+      },
+      {
+        "city": "Primavera",
+        "centers": [
+          "FABRICA PRIMAVERA"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Paraná",
+    "cities": [
+      {
+        "city": "Cascavel",
+        "centers": [
+          "CD CASCAVEL"
+        ]
+      },
+      {
+        "city": "Colombo",
+        "centers": [
+          "CD QUATRO BARRAS"
+        ]
+      },
+      {
+        "city": "Guarapuava",
+        "centers": [
+          "CD GUARAPUAVA"
+        ]
+      },
+      {
+        "city": "Londrina",
+        "centers": [
+          "CD LONDRINA"
+        ]
+      },
+      {
+        "city": "Maringá",
+        "centers": [
+          "CD MARINGA"
+        ]
+      },
+      {
+        "city": "Ponta Grossa",
+        "centers": [
+          "CD PONTA GROSSA"
+        ]
+      },
+      {
+        "city": "Rio Branco do Sul",
+        "centers": [
+          "FABRICA I/II RIO BRANCO"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Pernambuco",
+    "cities": [
+      {
+        "city": "Caruaru",
+        "centers": [
+          "CD CARUARU"
+        ]
+      },
+      {
+        "city": "Paulista",
+        "centers": [
+          "FAB POTY PAULISTA"
+        ]
+      },
+      {
+        "city": "Petrolina",
+        "centers": [
+          "CD PETROLINA"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Piauí",
+    "cities": [
+      {
+        "city": "Teresina",
+        "centers": [
+          "CD TERESINA"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Rio de Janeiro",
+    "cities": [
+      {
+        "city": "Cantagalo",
+        "centers": [
+          "FABRICA RIO NEGRO"
+        ]
+      },
+      {
+        "city": "Rio de Janeiro",
+        "centers": [
+          "CD IRAJA",
+          "FAB SANTA CRUZ (SEPETIBA)"
+        ]
+      },
+      {
+        "city": "São Gonçalo",
+        "centers": [
+          "CD SAO GONCALO"
+        ]
+      },
+      {
+        "city": "Volta Redonda",
+        "centers": [
+          "FAB VOLTA REDONDA"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Rio Grande do Sul",
+    "cities": [
+      {
+        "city": "Caxias do Sul",
+        "centers": [
+          "CD CAXIAS DO SUL"
+        ]
+      },
+      {
+        "city": "Esteio",
+        "centers": [
+          "FABRICA ESTEIO",
+          "CD ESTEIO"
+        ]
+      },
+      {
+        "city": "Passo Fundo",
+        "centers": [
+          "CD PASSO FUNDO"
+        ]
+      },
+      {
+        "city": "Pinheiro Machado",
+        "centers": [
+          "FABRICA P.MACHADO"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Rondônia",
+    "cities": [
+      {
+        "city": "Porto Velho",
+        "centers": [
+          "FABRICA PORTO VELHO"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Santa Catarina",
+    "cities": [
+      {
+        "city": "Biguaçu",
+        "centers": [
+          "CD G. FLORIANOPOLIS"
+        ]
+      },
+      {
+        "city": "Blumenau",
+        "centers": [
+          "CD BLUMENAU"
+        ]
+      },
+      {
+        "city": "Cordilheira Alta",
+        "centers": [
+          "CD CHAPECÓ"
+        ]
+      },
+      {
+        "city": "Cricíuma",
+        "centers": [
+          "CD CRICIUMA"
+        ]
+      },
+      {
+        "city": "Imbituba",
+        "centers": [
+          "MOAGEM IMBITUBA"
+        ]
+      },
+      {
+        "city": "Itajaí",
+        "centers": [
+          "FABRICA ITAJAI"
+        ]
+      },
+      {
+        "city": "Joinville",
+        "centers": [
+          "CD JOINVILLE"
+        ]
+      },
+      {
+        "city": "Vidal Ramos",
+        "centers": [
+          "MINA VIDAL RAMOS"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "São Paulo",
+    "cities": [
+      {
+        "city": "Araraquara",
+        "centers": [
+          "CD ARARAQUARA"
+        ]
+      },
+      {
+        "city": "Barueri",
+        "centers": [
+          "FABRICA BARUERI"
+        ]
+      },
+      {
+        "city": "Bauru",
+        "centers": [
+          "CD BAURU"
+        ]
+      },
+      {
+        "city": "Birigui",
+        "centers": [
+          "CD ARAÇATUBA"
+        ]
+      },
+      {
+        "city": "Buri",
+        "centers": [
+          "CD BURI"
+        ]
+      },
+      {
+        "city": "Cajamar",
+        "centers": [
+          "FABRICA CAJAMAR"
+        ]
+      },
+      {
+        "city": "Campinas",
+        "centers": [
+          "CD CAMPINAS"
+        ]
+      },
+      {
+        "city": "Cubatão",
+        "centers": [
+          "FABRICA CUBATAO"
+        ]
+      },
+      {
+        "city": "Diadema",
+        "centers": [
+          "CD DIADEMA"
+        ]
+      },
+      {
+        "city": "Embu das Artes",
+        "centers": [
+          "CD EMBU"
+        ]
+      },
+      {
+        "city": "Lavrinhas",
+        "centers": [
+          "FABRICA ITAPEVA"
+        ]
+      },
+      {
+        "city": "Limeira",
+        "centers": [
+          "FABRICA LIMEIRA"
+        ]
+      },
+      {
+        "city": "Osasco",
+        "centers": [
+          "CD OSASCO"
+        ]
+      },
+      {
+        "city": "Ourinhos",
+        "centers": [
+          "CD OURINHOS"
+        ]
+      },
+      {
+        "city": "Regente Feijó",
+        "centers": [
+          "CD REGENTE FEIJÓ"
+        ]
+      },
+      {
+        "city": "Ribeirão Preto",
+        "centers": [
+          "CD RIBEIRAO PRETO"
+        ]
+      },
+      {
+        "city": "Salto de Pirapora",
+        "centers": [
+          "FABRICA SALTO"
+        ]
+      },
+      {
+        "city": "São José do Rio Preto",
+        "centers": [
+          "CD SAO JOSE DO R. PRETO"
+        ]
+      },
+      {
+        "city": "São José dos Campos",
+        "centers": [
+          "CD S. J. DOS CAMPOS"
+        ]
+      },
+      {
+        "city": "São Miguel Paulista",
+        "centers": [
+          "CD S.MIGUEL PAULISTA"
+        ]
+      },
+      {
+        "city": "Votorantim",
+        "centers": [
+          "FABRICA SANTA HELENA"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Sergipe",
+    "cities": [
+      {
+        "city": "Laranjeiras",
+        "centers": [
+          "FABRICA LARANJEIRAS"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Tocantins",
+    "cities": [
+      {
+        "city": "Xambioá",
+        "centers": [
+          "FABRICA XAMBIOA"
+        ]
+      }
+    ]
+  }
+]

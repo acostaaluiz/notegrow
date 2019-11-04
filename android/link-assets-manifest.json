@@ -1,0 +1,33 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/Roboto-Italic.ttf",
+      "sha1": "dc6756127707ab2d6e388a6023087351fa41999c"
+    },
+    {
+      "path": "assets/fonts/Roboto-Medium.ttf",
+      "sha1": "f6783010d5def128c4a1539333324f75701d9bab"
+    },
+    {
+      "path": "assets/fonts/Roboto-MediumItalic.ttf",
+      "sha1": "e4e31e55d279a9b12c32327a60a3a65c8350e5df"
+    },
+    {
+      "path": "assets/fonts/Roboto-Regular.ttf",
+      "sha1": "096c9245b6a192d1403a82848e104a65f578a8ec"
+    },
+    {
+      "path": "assets/fonts/VotorantimSans-Bold.ttf",
+      "sha1": "24209d701fab27c088f87a88eb8fce1c95943e7f"
+    },
+    {
+      "path": "assets/fonts/VotorantimSans-Medium.ttf",
+      "sha1": "291698369b5f0d64f468cd955f2704b4d8e0d272"
+    },
+    {
+      "path": "assets/fonts/VotorantimSans-Regular.ttf",
+      "sha1": "7bb55471285885d6647ef972a9997281df4f6152"
+    }
+  ]
+}
