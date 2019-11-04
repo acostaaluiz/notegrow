@@ -38,7 +38,7 @@ function TouchableContainer({ internal, secondary, ...props }: TouchableType) {
     <TouchAndroid
       {...props}
       background={TouchableNativeFeedback.Ripple(
-        secondary ? colors.blue.secondary : colors.fontColorDark.active,
+        secondary ? colors.blue.secondary : colors.white.active,
       )}>
       {internal}
     </TouchAndroid>

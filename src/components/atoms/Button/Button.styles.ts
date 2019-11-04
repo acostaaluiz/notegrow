@@ -40,7 +40,7 @@ const renderButtonStyle = (secondary: boolean | undefined, disabled: boolean | u
   if (secondary) {
     let borderColor = colors.blue.secondary;
     if (disabled) {
-      borderColor = dark ? colors.fontColorDark.inactive : colors.fontColor.inactive
+      borderColor = dark ? colors.white.inactive : colors.black.inactive
     }
     return `
       background: transparent;
@@ -49,7 +49,7 @@ const renderButtonStyle = (secondary: boolean | undefined, disabled: boolean | u
   }
 
   return `
-    background: ${disabled ? colors.fontColor.disabled : colors.blue.secondary};
+    background: ${disabled ? colors.black.disabled : colors.blue.secondary};
   `
 }
 
@@ -65,10 +65,10 @@ export const ButtonContainer = styled.View`
 
 export const renderTextStyle = (secondary?: boolean, disabled?: boolean, dark?: boolean) => {
   if (disabled) {
-    return dark ? colors.fontColorDark.inactive : colors.fontColor.inactive;
+    return dark ? colors.white.inactive : colors.black.inactive;
   }
   if (!secondary || secondary && dark) {
-    return colors.fontColorDark.active
+    return colors.white.active
   }
   return colors.blue.primary;
 }

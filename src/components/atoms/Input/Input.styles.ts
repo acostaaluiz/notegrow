@@ -9,7 +9,7 @@ export const StyledInput = styled.TextInput<{ focus?: boolean, error?: boolean }
   border: solid ${colors.blue.primary};
   border-color: ${(props) => props.error ? colors.red.primaryopc20 : colors.blue.primaryopc15};
   background-color: ${(props) => props.focus ? 'white' : colors.blue.primaryopc15};
-  color: ${(props) => props.error ? colors.red.primaryopc20 : colors.fontColor.active};
+  color: ${(props) => props.error ? colors.red.primaryopc20 : colors.black.active};
   border-radius: 8px;
 `;
 
