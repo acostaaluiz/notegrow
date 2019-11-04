@@ -10,6 +10,7 @@ import {
   TouchIOS,
   TouchAndroid,
   TouchProps,
+  RippleContainer,
 } from './Button.styles';
 
 import colors from '../../../styles/colors';
@@ -35,19 +36,20 @@ function TouchableContainer({ internal, secondary, ...props }: TouchableType) {
     return <TouchIOS {...props}>{internal}</TouchIOS>;
   }
   return (
-    <TouchAndroid
-      {...props}
-      background={TouchableNativeFeedback.Ripple(
-        secondary ? colors.blue.secondary : colors.white.active,
-      )}>
-      {internal}
-    </TouchAndroid>
+    <RippleContainer>
+      <TouchAndroid
+        {...props}
+        background={TouchableNativeFeedback.Ripple(
+          secondary ? colors.blue.secondary : colors.white.active,
+        )}>
+        {internal}
+      </TouchAndroid>
+    </RippleContainer>
   );
 }
 
 function Button({ title, icon, width, inline, ...props }: ButtonType) {
   const { disabled, secondary } = props;
-
   // Can't use internal as an external component because
   // of a TouchableNativeFeedback bug with styled components
   const internal = (

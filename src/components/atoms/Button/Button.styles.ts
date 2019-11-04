@@ -16,20 +16,31 @@ interface ButtonThemeProps {
 }
 
 const renderWidth = (iconized?: boolean, inline?: boolean, width?: string) => {
-  if (iconized || inline) {
+  if (iconized) {
+    return '60px'
+  }
+  if (inline) {
     return 'auto'
   }
   return width || '100%';
 }
 
 const touchBase = css<ButtonThemeProps>`
+  display: flex;
+  flex-flow: row;
   width: ${({ theme: { iconized, inline, width } }: ButtonThemeProps) => renderWidth(iconized, inline, width)};
+  height: ${({ theme: { iconized, } }: ButtonThemeProps) => iconized ? '60px' : 'auto'};
   border-radius: ${({ theme: { iconized } }: ButtonThemeProps) => iconized ? '60px' : '20px'};
 `;
+
 
 export const TouchIOS = styled.TouchableOpacity<TouchProps>`
   ${touchBase}
 `;
+
+export const RippleContainer = styled.View<TouchProps>`
+  ${touchBase}
+`
 
 export const TouchAndroid = styled.TouchableNativeFeedback<TouchProps>`
   ${touchBase}
@@ -48,19 +59,25 @@ const renderButtonStyle = (secondary: boolean | undefined, disabled: boolean | u
     `
   }
 
+  if (dark) {
+    return `
+      background: ${disabled ? colors.white.disabled : colors.blue.secondary};
+    `
+  }
+
   return `
     background: ${disabled ? colors.black.disabled : colors.blue.secondary};
   `
 }
 
 export const ButtonContainer = styled.View`
-  display: flex;
-  flex-flow: row;
   justify-content: center;
   align-items: center;
-  padding: ${({ theme: { iconized } }: ButtonThemeProps) => iconized ? ' 16px' : `24px 16px`};
+  padding: ${({ theme: { iconized } }: ButtonThemeProps) => iconized ? '0' : `24px 16px`};
   ${touchBase}
   ${({ theme: { secondary, disabled, dark } }: ButtonThemeProps) => renderButtonStyle(secondary, disabled, dark)};
+  width: ${({ theme: { iconized, inline, width } }: ButtonThemeProps) => renderWidth(iconized, inline, width)};
+  height: ${({ theme: { iconized, } }: ButtonThemeProps) => iconized ? '60px' : 'auto'};
 `;
 
 export const renderTextStyle = (secondary?: boolean, disabled?: boolean, dark?: boolean) => {
