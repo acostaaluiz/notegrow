@@ -17,18 +17,13 @@ function HomeTemplate({ pageName, user, onLogoff }: HomeTemplateProps) {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'black',
       }}>
       <Text style={{ fontSize: 24 }}>{pageName}</Text>
       <Text style={{ fontSize: 32, fontWeight: 'bold' }}>{user.name}</Text>
       {/* <Button title="Logoff" onPress={onLogoff} /> */}
-      <ThemeProvider theme={{ dark: true }}>
+      <ThemeProvider theme={{ dark: false }}>
         <>
-          <Button
-            title="Ok, entendi"
-            secondary
-            onPress={() => console.log('wa')}
-          />
+          <Button disabled icon="favorite" onPress={() => console.log('wa')} />
           <Button
             title="Ok, entendi"
             secondary

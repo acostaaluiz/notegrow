@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import {
   Platform,
   TouchableWithoutFeedbackProps,
@@ -11,11 +11,15 @@ import {
   TouchAndroid,
   TouchProps,
 } from './Button.styles';
-import { ThemeProvider } from 'styled-components';
+
 import colors from '../../../styles/colors';
+import { ThemeProvider } from 'styled-components';
+import ButtonIcon from './ButtonIcon';
+import IconNames from '../Icon/IconNames';
 
 interface ButtonInternalProps {
-  title: string;
+  title?: string;
+  icon?: IconNames;
 }
 
 type ButtonType = ButtonInternalProps &
@@ -41,26 +45,32 @@ function TouchableContainer({ internal, secondary, ...props }: TouchableType) {
   );
 }
 
-function Button({ title, width, inline, ...props }: ButtonType) {
+function Button({ title, icon, width, inline, ...props }: ButtonType) {
   const { disabled, secondary } = props;
 
   // Can't use internal as an external component because
   // of a TouchableNativeFeedback bug with styled components
   const internal = (
     <ButtonContainer>
-      <ButtonText>{title}</ButtonText>
+      {icon && <ButtonIcon icon={icon} />}
+      {title && <ButtonText>{title}</ButtonText>}
     </ButtonContainer>
   );
 
   return (
-    <ThemeProvider theme={{ disabled, inline, width, secondary }}>
-      <TouchableContainer internal={internal} {...props} />
+    <ThemeProvider
+      theme={{
+        disabled,
+        inline,
+        width,
+        secondary,
+        iconized: icon && !title,
+      }}>
+      <TouchableContainer internal={internal} inline={inline} {...props} />
     </ThemeProvider>
   );
 }
 
-Button.defaultProps = {
-  title: 'Hello World',
-} as Partial<ButtonType>;
+Button.defaultProps = {} as Partial<ButtonType>;
 
 export default Button;
