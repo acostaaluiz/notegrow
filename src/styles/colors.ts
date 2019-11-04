@@ -1,5 +1,7 @@
 const primary_blue = '#1F63AF';
 const primary_red = '#EE4056';
+const primary_black = '#000000';
+const primary_white = '#FFFFFF';
 
 export const blue = {
   primary: primary_blue,
@@ -13,16 +15,16 @@ export const red = {
   primaryopc20: addAlpha(primary_red, 0.20)
 }
 
-export const fontColor = {
-  active: '#212121',
-  inactive: '#6b6b6b',
-  disabled: '#9e9e9e'
+export const black = {
+  active: addAlpha(primary_black, 0.87),
+  inactive: addAlpha(primary_black, 0.58),
+  disabled: addAlpha(primary_black, 0.38)
 }
 
-export const fontColorDark = {
-  active: '#FFFFFF',
-  inactive: '#9f9fa0',
-  disabled: '#7d7e7f'
+export const white = {
+  active: primary_white,
+  inactive: addAlpha(primary_white, 0.54),
+  disabled: addAlpha(primary_white, 0.38)
 }
 
 export const comomColors = {
@@ -37,6 +39,6 @@ export function addAlpha(color: string, opacity: number): string {
 export default {
   blue,
   red,
-  fontColor,
-  fontColorDark
+  black,
+  white
 }

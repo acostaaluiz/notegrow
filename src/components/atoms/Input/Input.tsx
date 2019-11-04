@@ -12,7 +12,16 @@ interface InputProps extends TextInputProperties {
   assistiveText?: string;
   editable: boolean;
 }
-function Input({ value, onChangeText, style, innerref, error, assistiveText, editable, ...props }: InputProps) {
+function Input({
+  value,
+  onChangeText,
+  style,
+  innerref,
+  error,
+  assistiveText,
+  editable,
+  ...props
+}: InputProps) {
   const overloadStyle = style || {};
   const [focus, setFocus] = useState(false);
   return (
@@ -22,18 +31,21 @@ function Input({ value, onChangeText, style, innerref, error, assistiveText, edi
         {...props}
         style={overloadStyle}
         onChangeText={text => onChangeText(text)}
-        onFocus={() => { setFocus(true) }}
-        onBlur={() => { setFocus(false) }}
+        onFocus={() => {
+          setFocus(true);
+        }}
+        onBlur={() => {
+          setFocus(false);
+        }}
         value={value}
         focus={focus}
         error={error}
         editable={editable}
-        placeholderTextColor={editable ? colors.fontColor.active : colors.fontColor.inactive}
+        placeholderTextColor={
+          editable ? colors.black.active : colors.black.inactive
+        }
       />
-      <StyledText
-        ref={innerref}
-        style={overloadStyle}
-        error={error}>
+      <StyledText ref={innerref} style={overloadStyle} error={error}>
         {assistiveText}
       </StyledText>
     </View>
@@ -41,6 +53,6 @@ function Input({ value, onChangeText, style, innerref, error, assistiveText, edi
 }
 Input.defaultProps = {
   value: ' ',
-  onChangeText(text: string) { },
+  onChangeText(text: string) {},
 } as Partial<InputProps>;
 export default Input;

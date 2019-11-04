@@ -22,7 +22,7 @@ function LoginScreen({ navigation }: LoginScreen) {
 
   useEffect(() => {
     if (data) {
-      navigation.navigate('FAQ');
+      navigation.navigate('Home');
     }
   }, [data]);
 
