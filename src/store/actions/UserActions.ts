@@ -27,9 +27,7 @@ function userLogoff() {
 export function savePreferences(dispatch: Dispatch) {
   return async (state: string, city: string, center: string) => {
     dispatch({ type: USER_SAVEPREFERENCES_PENDING });
-
     dispatch({ type: USER_SAVEPREFERENCES_SUCCESS, payload: { state, city, center } });
-    // dispatch({ type: USER_SAVEPREFERENCES_ERROR });
   }
 }
 

@@ -12,7 +12,7 @@ function HomeTemplate({ pageName, user, onLogoff }: HomeTemplateProps) {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text style={{ fontSize: 24 }}>{pageName}</Text>
-      <Text style={{ fontSize: 32, fontWeight: 'bold' }}>{user.name}</Text>
+      <Text style={{ fontSize: 32, fontWeight: 'bold' }}>{user.userName}</Text>
       <Button title="Logoff" onPress={onLogoff} />
     </View>
   );
@@ -20,8 +20,8 @@ function HomeTemplate({ pageName, user, onLogoff }: HomeTemplateProps) {
 
 HomeTemplate.defaultProps = {
   pageName: 'Home',
-  user: { name: 'Valente' },
-  onLogoff() {},
+  user: { userName: 'Valente' },
+  onLogoff() { },
 } as Partial<HomeTemplateProps>;
 
 export default HomeTemplate;

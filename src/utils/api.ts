@@ -24,7 +24,6 @@ const API = {
   get(endpoint: string): Promise<any> {
     return fetch(`${this.url}/${endpoint}`, {
       method: 'GET',
-      // eslint-disable-next-line no-undef
       headers: new Headers({
         Accept: 'application/json'
       })
@@ -37,7 +36,10 @@ const API = {
   post<T>(endpoint: string, body: T, headersProp?: Headers | string[][] | Record<string, string>): Promise<any> {
     const _body = JSON.stringify(body);
 
-    let headers = { 'Content-Type': 'application/json' };
+    let headers = {
+      'Content-Type': 'application/json'
+    };
+
     if (headersProp) {
       headers = { ...headers, ...headersProp };
     }
