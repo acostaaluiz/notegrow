@@ -22,11 +22,7 @@ function HomeTemplate({ pageName, user, onLogoff }: HomeTemplateProps) {
       <View>
         <ThemeProvider theme={{ dark: false }}>
           <>
-            <Button
-              secondary
-              icon="favorite"
-              onPress={() => console.log('wa')}
-            />
+            <Button secondary onPress={() => console.log('wa')} />
             <Button
               secondary
               icon="add"
