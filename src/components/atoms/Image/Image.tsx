@@ -3,10 +3,12 @@ import Abstract1 from './Abstract1';
 import Logo from './Logo';
 import { SvgProps } from 'react-native-svg';
 import Abstract2 from './Abstract2';
+import Abstract3 from './Abstract3';
 
 export const ImagesNames = [
   'abstract1',
   'abstract2',
+  'abstract3',
   'logo',
   'logo-secondary',
   'logo-white',
@@ -25,6 +27,8 @@ function Image({ name, ...props }: ImageProps) {
       return <Abstract1 {...props} />;
     case 'abstract2':
       return <Abstract2 {...props} />;
+    case 'abstract3':
+      return <Abstract3 {...props} />;
     case 'logo':
       return <Logo {...props} />;
     case 'logo-secondary':
