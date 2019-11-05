@@ -9,7 +9,7 @@ interface AppOpenedProps {
 }
 
 function AppOpened({ navigation }: AppOpenedProps) {
-  const user = useSelector(({ user }: AppState) => user.data);
+  const user = useSelector(({ login }: AppState) => login.data);
   navigation.navigate(!user ? 'Login' : 'Home');
   return (
     <View>

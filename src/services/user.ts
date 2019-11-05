@@ -3,14 +3,10 @@ import API from "../utils/api";
 
 const { SECRET_KEY } = Config;
 
-export function login(user: string, password: string) {
-
-  //RequestBody end-point auth/token/
-  const grant_type = JSON.stringify('grant_type=password&username=' + user + '&password=' + password);
-
+export function getUserByDocument(document: string) {
   const headers = new Headers({
     'Content-Type': 'application/json'
   });
 
-  return API.post('login', { user, password }, headers);
+  return API.get('getUser');
 }

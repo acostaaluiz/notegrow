@@ -21,8 +21,8 @@ const API = {
     return Promise.reject('Oops, we haven\'t got JSON!');
   },
 
-  get(endpoint: string): Promise<any> {
-    return fetch(`${this.url}/${endpoint}`, {
+  get(endpoint: string, parameter?: string): Promise<any> {
+    return fetch(`${this.url}/${endpoint}/${parameter}`, {
       method: 'GET',
       headers: new Headers({
         Accept: 'application/json'
