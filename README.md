@@ -169,6 +169,16 @@ As pastas que contém os assets fica dentro do arquivo `react-native.config.js`.
 
 A cada alteração nas pastas dos assets (incluindo ou removendo arquivos), é necessário executar o comando `yarn asset`, que ele sincroniza as alterações das pastas com os projetos nativos.
 
+### Visualizand e Criando histórias do Storybook
+
+#### Visualizando
+
+No emulador iOS, aperte Option (Alt) e clique arrastando o mouse (como se fizesse o gesto de pinça), aparecerá um menu de debug. Clique em Abrir Storybook.
+
+#### Criando
+
+TODO
+
 ### Criando componentes estilizados
 
 ## Build
