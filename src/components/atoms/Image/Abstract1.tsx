@@ -1,9 +1,10 @@
 import React from 'react';
-import { G, Svg, Defs, Path, ClipPath, Circle, Rect } from 'react-native-svg';
+import { Path, Circle, Rect, SvgProps } from 'react-native-svg';
+import SVGContainer from './SvgContainer';
 
-function Abstract1() {
+function Abstract1(props: SvgProps) {
   return (
-    <Svg width="100%" height="100%" viewBox="0 0 359.5 151.52">
+    <SVGContainer {...props} viewBox="0 0 359.5 151.52">
       <Circle
         cx="57.5"
         cy="30"
@@ -44,7 +45,7 @@ function Abstract1() {
         opacity=".5"
         d="M138.71 68.79l-42.42 42.42 40.28 40.29h84.86l-82.72-82.71z"
       />
-    </Svg>
+    </SVGContainer>
   );
 }
 
