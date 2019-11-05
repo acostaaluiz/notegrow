@@ -4,7 +4,7 @@ import { getStatusBarHeight } from 'react-native-safe-area-view';
 import { StatusBar, StatusBarProps } from 'react-native';
 
 interface StatusBarTheme {
-  theme: {
+  theme?: {
     dark: boolean;
   };
 }
@@ -19,9 +19,11 @@ const StatusBarStyled = styled.View<StatusBarTheme>`
 `;
 
 function StatusBarComponent({
-  theme: { dark },
+  theme,
   ...props
 }: StatusBarTheme & StatusBarProps) {
+  const dark = (theme && theme.dark === true) as boolean;
+
   return (
     <>
       <StatusBar
