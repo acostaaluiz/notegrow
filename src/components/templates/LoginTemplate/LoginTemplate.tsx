@@ -1,13 +1,6 @@
 import React, { useState, useRef } from 'react';
-import {
-  Button,
-  KeyboardAvoidingView,
-  Text,
-  Keyboard,
-  TouchableWithoutFeedback,
-  TextInput,
-} from 'react-native';
-import { Input } from '../../atoms';
+import { Button, KeyboardAvoidingView, Text, TextInput } from 'react-native';
+import { Input, CloseKeyboard } from '../../atoms';
 
 interface LoginTemplateProps {
   pending: boolean;
@@ -33,7 +26,7 @@ function LoginTemplate({ pending, onSubmit }: LoginTemplateProps) {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+    <CloseKeyboard>
       <KeyboardAvoidingView
         style={{
           flex: 1,
@@ -76,7 +69,7 @@ function LoginTemplate({ pending, onSubmit }: LoginTemplateProps) {
         <Button title="Login" onPress={submit} disabled={pending} />
         {pending && <Text>Carregando...</Text>}
       </KeyboardAvoidingView>
-    </TouchableWithoutFeedback>
+    </CloseKeyboard>
   );
 }
 

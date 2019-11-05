@@ -6,3 +6,5 @@ export { default as Image } from './Image'
 
 export { default as StatusBarComponent } from './StatusBarComponent'
 
+export { default as CloseKeyboard } from './CloseKeyboard'
+
