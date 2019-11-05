@@ -18,7 +18,10 @@ const pageContent = {
 };
 
 function SignUpBlueScreen({ navigation }: SignUpBlueScreenProps) {
-  return <BlueScreenTemplate {...pageContent} />;
+  const onPress = () => {
+    navigation.navigate('SignUpForm');
+  };
+  return <BlueScreenTemplate {...pageContent} onPress={onPress} />;
 }
 
 export default SignUpBlueScreen;
