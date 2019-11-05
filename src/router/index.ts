@@ -6,6 +6,7 @@ import AppOpened from '../scenes/AppOpened';
 import HomeScreen from '../scenes/HomeScreen';
 import UserPreferences from '../scenes/UserPreferencesScreen';
 import FAQScreen from '../scenes/FAQScreen';
+import SignUpBlueScreen from '../scenes/SignUpBlueScreen';
 
 const HomeNavigator = createBottomTabNavigator({
   Home: {
@@ -25,8 +26,9 @@ const HomeNavigator = createBottomTabNavigator({
 const LoginNavigator = createStackNavigator({
   Login: {
     screen: LoginScreen,
-  }
-});
+  },
+  SignUp: { screen: SignUpBlueScreen, navigationOptions: { header: null } }
+}, { initialRouteName: 'SignUp' });
 
 const FAQNavigator = createStackNavigator({
   FAQ: {
