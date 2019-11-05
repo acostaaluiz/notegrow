@@ -5,14 +5,28 @@ import { store, persisted } from './store';
 import Router from './router';
 import { PersistGate } from 'redux-persist/integration/react';
 import { ErrorBoundary } from './components/utils';
+import StorybookUIRoot from '../storybook';
+import DebugMenu from './utils/DebugMenu';
 
 function App() {
+  let Child: any = Router;
+
+  if (process.env.NODE_ENV === 'development') {
+    Child = () => (
+      <>
+        <DebugMenu>
+          <Router />
+        </DebugMenu>
+      </>
+    );
+  }
+
   return (
     <ErrorBoundary>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persisted}>
           <ReduxNetworkProvider>
-            <Router />
+            <Child />
           </ReduxNetworkProvider>
         </PersistGate>
       </Provider>
