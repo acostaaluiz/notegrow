@@ -1,15 +1,15 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import { UserInterface } from '../../../models/users';
+import { LoginInterface } from '../../../models/login';
 import { Button } from '../../atoms';
 
 interface HomeTemplateProps {
   pageName: string;
-  user: UserInterface;
+  login: LoginInterface;
   onLogoff: () => void;
 }
 
-function HomeTemplate({ pageName, user, onLogoff }: HomeTemplateProps) {
+function HomeTemplate({ pageName, login, onLogoff }: HomeTemplateProps) {
   return (
     <View
       style={{
@@ -18,7 +18,7 @@ function HomeTemplate({ pageName, user, onLogoff }: HomeTemplateProps) {
         alignItems: 'center',
       }}>
       <Text style={{ fontSize: 24 }}>{pageName}</Text>
-      <Text style={{ fontSize: 32, fontWeight: 'bold' }}>{user.name}</Text>
+      <Text style={{ fontSize: 32, fontWeight: 'bold' }}>{login.userName}</Text>
       <Button secondary inline title="Logoff" onPress={onLogoff} />
     </View>
   );
@@ -26,8 +26,8 @@ function HomeTemplate({ pageName, user, onLogoff }: HomeTemplateProps) {
 
 HomeTemplate.defaultProps = {
   pageName: 'Home',
-  user: { name: 'Valente' },
-  onLogoff() {},
+  login: { userName: 'Valente' },
+  onLogoff() { },
 } as Partial<HomeTemplateProps>;
 
 export default HomeTemplate;

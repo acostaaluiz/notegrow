@@ -82,7 +82,7 @@ function LoginTemplate({ pending, onSubmit }: LoginTemplateProps) {
 
 LoginTemplate.defaultProps = {
   pending: false,
-  onSubmit(username: string, password: string) {},
+  onSubmit(username: string, password: string) { },
 } as Partial<LoginTemplateProps>;
 
 export default LoginTemplate;

@@ -12,14 +12,14 @@ function AuthGuard({
   navigation,
   children,
 }: PropsWithChildren<AuthGuardProps>) {
-  const user = useSelector(({ user }: AppState) => user.data);
+  const login = useSelector(({ login }: AppState) => login.data);
   useEffect(() => {
-    if (!user) {
+    if (!login) {
       navigation.navigate('Login');
     }
-  }, [user]);
+  }, [login]);
 
-  if (!user) return null;
+  if (!login) return null;
 
   return <>{children}</>;
 }
