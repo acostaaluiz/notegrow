@@ -29,5 +29,4 @@ export const Text = styled.Text`
   ${styledfont.body1}
   color: ${colors.white.active};
   width: 85%;
-
 `;

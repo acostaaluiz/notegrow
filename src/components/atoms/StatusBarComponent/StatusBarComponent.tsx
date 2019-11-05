@@ -9,7 +9,8 @@ interface StatusBarTheme {
   };
 }
 
-const backgroundColor = (dark: boolean) => (dark ? 'rgb(44,77,148)' : 'white');
+const backgroundColor = (dark: boolean) =>
+  dark ? 'rgb(44,77,148)' : 'rgb(249,249,249)';
 const barStyle = (dark: boolean): 'light-content' | 'dark-content' =>
   dark ? 'light-content' : 'dark-content';
 
