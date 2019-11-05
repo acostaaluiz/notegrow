@@ -54,8 +54,8 @@ function Button({ title, icon, width, inline, ...props }: ButtonType) {
   // of a TouchableNativeFeedback bug with styled components
   const internal = (
     <ButtonContainer>
-      {icon && <ButtonIcon icon={icon} />}
-      {title && <ButtonText>{title}</ButtonText>}
+      {icon ? <ButtonIcon icon={icon} /> : null}
+      {title ? <ButtonText>{title}</ButtonText> : null}
     </ButtonContainer>
   );
 
