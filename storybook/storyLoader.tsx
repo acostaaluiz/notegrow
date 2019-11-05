@@ -5,11 +5,13 @@
 
 function loadStories() {
 	require('../src/components/atoms/Button/Button.stories');
+	require('../src/components/atoms/Image/Image.stories');
 	require('../src/components/atoms/Input/Input.stories');
 }
 
 const stories = [
 	'../src/components/atoms/Button/Button.stories',
+	'../src/components/atoms/Image/Image.stories',
 	'../src/components/atoms/Input/Input.stories'
 ];
 
