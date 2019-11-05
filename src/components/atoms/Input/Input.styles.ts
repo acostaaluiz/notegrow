@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 import colors from '../../../styles/colors';
-import fonts from '../../../styles/fonts';
+import { fonts } from '../../../styles/fonts';
 
 export const StyledInput = styled.TextInput<{ focus?: boolean, error?: boolean }>`
   height: 40px;

@@ -3,11 +3,13 @@ import { TextInputProperties, TextStyle, View, Text } from 'react-native';
 import { StyledInput, StyledText } from './Input.styles';
 import colors from '../../../styles/colors';
 
+type innerrefType = (ref: unknown) => void;
+
 interface InputProps extends TextInputProperties {
   value: string;
   onChangeText: (text: string) => void;
   style?: TextStyle;
-  innerref?: MutableRefObject<any>;
+  innerref?: MutableRefObject<any> | innerrefType;
   error?: boolean;
   assistiveText?: string;
   editable: boolean;
@@ -30,7 +32,7 @@ function Input({
         ref={innerref}
         {...props}
         style={overloadStyle}
-        onChangeText={text => onChangeText(text)}
+        onChangeText={text => onChangeText && onChangeText(text)}
         onFocus={() => {
           setFocus(true);
         }}
@@ -51,8 +53,5 @@ function Input({
     </View>
   );
 }
-Input.defaultProps = {
-  value: ' ',
-  onChangeText(text: string) {},
-} as Partial<InputProps>;
+Input.defaultProps = {} as Partial<InputProps>;
 export default Input;
