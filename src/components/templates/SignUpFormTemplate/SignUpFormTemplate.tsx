@@ -37,8 +37,7 @@ function SignUpFormTemplate({  }: SignUpFormTemplateProps) {
             textContentType="name"
             innerref={register({ name: 'name' })}
             onChangeText={text => setValue('name', text)}
-            assistiveText="Wa"
-            error
+            secureTextEntry
           />
           <Input placeholder="00/00/00" label="Data de nascimento" />
           <Input placeholder="000.000.000.00" label="CNH" />

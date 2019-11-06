@@ -6,6 +6,14 @@ export const InputView = styled.View`
   position: relative;
 `;
 
+export const PasswordViewerButton = styled.TouchableOpacity`
+  position: absolute;
+  right: 0;
+  top: 23;
+  padding: 15px 15px 10px;
+  z-index: 100;
+`;
+
 const renderBorder = (error?: boolean, editable?: boolean, focus?: boolean) => {
   if (!editable) {
     return colors.black.disabled;
@@ -16,6 +24,13 @@ const renderBorder = (error?: boolean, editable?: boolean, focus?: boolean) => {
   return colors.blue.primaryopc20;
 }
 
+const renderInputColor = (error?: boolean, focus?: boolean) => {
+  if (error && !focus) {
+    return colors.red.primary;
+  }
+  return colors.black.active;
+}
+
 export const StyledInput = styled.TextInput<{ focus?: boolean, error?: boolean, hasLabel?: boolean | string }>`
   ${styledfont.subtitle1}
   width: 100%;
@@ -23,7 +38,7 @@ export const StyledInput = styled.TextInput<{ focus?: boolean, error?: boolean, 
   border: solid ${colors.blue.primary};
   border-color: ${({ error, editable, focus }) => renderBorder(error, editable, focus)};
   background-color: ${({ focus }) => focus ? 'transparent' : colors.blue.primaryopc15};
-  color: ${({ error }) => error ? colors.red.primaryopc20 : colors.black.active};
+  color: ${({ error, focus }) => renderInputColor(error, focus)};
   border-radius: 8px;
 `;
 

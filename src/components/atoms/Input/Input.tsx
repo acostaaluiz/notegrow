@@ -1,6 +1,13 @@
 import React, { MutableRefObject, useState } from 'react';
 import { TextInputProperties, TextStyle, ViewStyle } from 'react-native';
-import { StyledInput, StyledText, Label, InputView } from './Input.styles';
+import {
+  StyledInput,
+  StyledText,
+  Label,
+  InputView,
+  PasswordViewerButton,
+} from './Input.styles';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import colors from '../../../styles/colors';
 
 type innerrefType = (ref: unknown) => void;
@@ -26,17 +33,27 @@ function Input({
   error,
   assistiveText,
   editable,
+  secureTextEntry,
   ...props
 }: InputProps) {
   const overloadStyle = style || {};
   const [focus, setFocus] = useState(false);
+  const [hidingPassword, setHidingPassword] = useState(secureTextEntry);
+
   return (
     <InputView style={containerStyle}>
+      {secureTextEntry ? (
+        <PasswordViewerButton
+          onPress={() => setHidingPassword(!hidingPassword)}>
+          <Icon name="remove-red-eye" size={24} />
+        </PasswordViewerButton>
+      ) : null}
       {label ? (
         <Label error={error} focus={focus} editable={editable}>
           {label}
         </Label>
       ) : null}
+
       <StyledInput
         ref={innerref}
         {...props}
@@ -54,6 +71,7 @@ function Input({
         editable={editable}
         hasLabel={label && label.length > 0}
         placeholderTextColor={colors.black.inactive}
+        secureTextEntry={hidingPassword}
       />
       {assistiveText ? (
         <StyledText ref={innerref} style={overloadStyle} error={error}>
