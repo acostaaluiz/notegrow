@@ -10,6 +10,7 @@ import {
   Keyboard,
   Alert,
 } from 'react-native';
+import DatePickerModal from '../../molecules/DatePickerModal';
 
 interface SignUpFormTemplateProps {
   onPressBack: () => void;
@@ -65,6 +66,7 @@ function SignUpFormTemplate({ onPressBack }: SignUpFormTemplateProps) {
               { name: 'birthday' },
               { required: 'Selecione seu aniversário' },
             )}
+            onFocus={() => Keyboard.dismiss()}
             error={errors.birthday && errors.birthday.message}
             onChangeText={text => setValue('birthday', text)}
           />
@@ -72,7 +74,7 @@ function SignUpFormTemplate({ onPressBack }: SignUpFormTemplateProps) {
             placeholder="000.000.000.00"
             label="CNH"
             containerStyle={{ marginTop: 11, marginBottom: 22 }}
-            keyboardType="decimal-pad"
+            keyboardType="number-pad"
             innerref={register(
               { name: 'cnh' },
               {
@@ -95,6 +97,7 @@ function SignUpFormTemplate({ onPressBack }: SignUpFormTemplateProps) {
             onChangeText={text => setValue('cnh', text)}
           />
           <Button title="Confirmar dados" onPress={handleSubmit(onSubmit)} />
+          {/* <DatePickerModal  /> */}
           <View style={{ flex: 1 }} />
         </Page>
       </KeyboardAvoidingView>

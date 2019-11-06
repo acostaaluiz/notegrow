@@ -37,6 +37,8 @@ function Input({
   assistiveText,
   editable,
   secureTextEntry,
+  onFocus,
+  onBlur,
   ...props
 }: InputProps) {
   const overloadStyle = style || {};
@@ -56,15 +58,21 @@ function Input({
         {label ? <Label>{label}</Label> : null}
 
         <StyledInput
-          ref={innerref}
+          ref={innerref as any}
           {...props}
           style={overloadStyle}
           onChangeText={text => onChangeText && onChangeText(text)}
-          onFocus={() => {
+          onFocus={e => {
             setFocus(true);
+            if (onFocus) {
+              onFocus(e);
+            }
           }}
-          onBlur={() => {
+          onBlur={e => {
             setFocus(false);
+            if (onBlur) {
+              onBlur(e);
+            }
           }}
           value={value}
           editable={editable}
