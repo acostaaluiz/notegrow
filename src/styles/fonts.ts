@@ -12,7 +12,7 @@ export const fonts = {
   }
 }
 
-const styledfont = {
+export const styledfont = {
   h1: `
     font-family: ${fonts.votorantim.bold};
     font-size: 56px;
@@ -26,7 +26,7 @@ const styledfont = {
     line-height: 40px;
   `,
   h3: `
-    font-family: ${fonts.votorantim.bold};
+    font-family: ${fonts.votorantim.medium};
     font-size: 24;
     letter-spacing: -1;
     line-height: 28px;
@@ -68,5 +68,3 @@ const styledfont = {
     line-height: 20px;
   `,
 }
-
-export default styledfont;

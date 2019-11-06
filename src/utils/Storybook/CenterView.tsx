@@ -6,6 +6,7 @@ const Cask = styled.View<{ theme: { dark: boolean } }>`
   justify-content: center;
   align-items: center;
   margin-top: 80;
+  padding: 0 15px;
   ${({ theme: { dark } }) => dark && `background-color: black;`}
 `;
 

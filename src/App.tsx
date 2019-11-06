@@ -7,6 +7,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { ErrorBoundary } from './components/utils';
 import StorybookUIRoot from '../storybook';
 import DebugMenu from './utils/DebugMenu';
+import { ThemeProvider } from 'styled-components';
 
 function App() {
   let Child: any = Router;
@@ -26,7 +27,9 @@ function App() {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persisted}>
           <ReduxNetworkProvider>
-            <Child />
+            <ThemeProvider theme={{}}>
+              <Child />
+            </ThemeProvider>
           </ReduxNetworkProvider>
         </PersistGate>
       </Provider>
