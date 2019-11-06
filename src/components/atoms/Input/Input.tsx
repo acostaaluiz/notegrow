@@ -1,13 +1,15 @@
 import React, { MutableRefObject, useState } from 'react';
-import { TextInputProperties, TextStyle, View, Text } from 'react-native';
-import { StyledInput, StyledText } from './Input.styles';
+import { TextInputProperties, TextStyle, ViewStyle } from 'react-native';
+import { StyledInput, StyledText, Label, InputView } from './Input.styles';
 import colors from '../../../styles/colors';
 
 type innerrefType = (ref: unknown) => void;
 
 interface InputProps extends TextInputProperties {
+  label: string;
   value: string;
   onChangeText: (text: string) => void;
+  containerStyle?: ViewStyle;
   style?: TextStyle;
   innerref?: MutableRefObject<any> | innerrefType;
   error?: boolean;
@@ -15,8 +17,10 @@ interface InputProps extends TextInputProperties {
   editable: boolean;
 }
 function Input({
+  label,
   value,
   onChangeText,
+  containerStyle,
   style,
   innerref,
   error,
@@ -27,7 +31,12 @@ function Input({
   const overloadStyle = style || {};
   const [focus, setFocus] = useState(false);
   return (
-    <View>
+    <InputView style={containerStyle}>
+      {label ? (
+        <Label error={error} focus={focus} editable={editable}>
+          {label}
+        </Label>
+      ) : null}
       <StyledInput
         ref={innerref}
         {...props}
@@ -43,15 +52,18 @@ function Input({
         focus={focus}
         error={error}
         editable={editable}
-        placeholderTextColor={
-          editable ? colors.black.active : colors.black.inactive
-        }
+        hasLabel={label && label.length > 0}
+        placeholderTextColor={colors.black.inactive}
       />
-      <StyledText ref={innerref} style={overloadStyle} error={error}>
-        {assistiveText}
-      </StyledText>
-    </View>
+      {assistiveText ? (
+        <StyledText ref={innerref} style={overloadStyle} error={error}>
+          {assistiveText}
+        </StyledText>
+      ) : null}
+    </InputView>
   );
 }
-Input.defaultProps = {} as Partial<InputProps>;
+Input.defaultProps = {
+  editable: true,
+} as Partial<InputProps>;
 export default Input;

@@ -6,7 +6,6 @@ export const Page = styled.View`
   flex: 1;
   padding: 20px 28px;
   justify-content: flex-end;
-  background-color: red;
 `;
 
 export const Title = styled.Text`

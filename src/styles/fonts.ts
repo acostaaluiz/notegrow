@@ -46,7 +46,7 @@ export const styledfont = {
   subtitle1: `
     font-family: ${fonts.roboto.regular};
     font-size: 16;
-    letter-spacing: 1.5;
+    letter-spacing: 0.15;
     line-height: 24px;
   `,
   subtitle2: `

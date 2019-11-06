@@ -32,15 +32,18 @@ function SignUpFormTemplate({  }: SignUpFormTemplateProps) {
           <View style={{ height: 100 }} />
           <Title>Preencha os dados abaixo para continuar</Title>
           <Input
+            label="Nome completo"
             placeholder="Seu nome completo"
             textContentType="name"
             innerref={register({ name: 'name' })}
             onChangeText={text => setValue('name', text)}
+            assistiveText="Wa"
+            error
           />
-          <Input placeholder="00/00/00" />
-          <Input />
+          <Input placeholder="00/00/00" label="Data de nascimento" />
+          <Input placeholder="000.000.000.00" label="CNH" />
           <Button title="wa" />
-          <View style={{ flex: 1, backgroundColor: 'green' }} />
+          <View style={{ flex: 1 }} />
         </Page>
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
