@@ -20,10 +20,10 @@ interface InputProps extends TextInputProperties {
   containerStyle?: ViewStyle;
   style?: TextStyle;
   assistiveTextStyle?: TextStyle;
-  innerref?: MutableRefObject<any> | innerrefType;
-  error?: boolean;
+  innerref?: MutableRefObject<any> | innerrefType | void;
+  error?: boolean | string;
   assistiveText?: string;
-  editable: boolean;
+  editable?: boolean;
 }
 function Input({
   label,
@@ -42,7 +42,6 @@ function Input({
   const overloadStyle = style || {};
   const [focus, setFocus] = useState(false);
   const [hidingPassword, setHidingPassword] = useState(secureTextEntry);
-
   return (
     <ThemeProvider
       theme={{ error, focus, editable, hasLabel: label && label.length > 0 }}>
@@ -73,9 +72,9 @@ function Input({
           secureTextEntry={hidingPassword}
         />
 
-        {assistiveText ? (
-          <StyledText ref={innerref} style={assistiveTextStyle}>
-            {assistiveText}
+        {assistiveText || error ? (
+          <StyledText style={assistiveTextStyle}>
+            {typeof error === 'string' ? error : assistiveText}
           </StyledText>
         ) : null}
       </InputView>
@@ -85,4 +84,5 @@ function Input({
 Input.defaultProps = {
   editable: true,
 } as Partial<InputProps>;
+
 export default Input;
