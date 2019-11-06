@@ -1,8 +1,7 @@
 import React from 'react';
 import useForm from 'react-hook-form';
 import { Page, Title } from './SignUpFormTemplate.styled';
-import { Input, CloseKeyboard, Button } from '../../atoms';
-import { string } from 'prop-types';
+import { Input, Button, BackButton } from '../../atoms';
 import {
   KeyboardAvoidingView,
   Platform,
@@ -11,7 +10,9 @@ import {
   Keyboard,
 } from 'react-native';
 
-interface SignUpFormTemplateProps {}
+interface SignUpFormTemplateProps {
+  onPressBack: () => void;
+}
 
 interface FormType {
   name: string;
@@ -19,9 +20,11 @@ interface FormType {
   cnh: string;
 }
 
-function SignUpFormTemplate({  }: SignUpFormTemplateProps) {
+function SignUpFormTemplate({ onPressBack }: SignUpFormTemplateProps) {
   const { register, setValue, handleSubmit, errors } = useForm<FormType>();
+  const inputStyle = { marginVertical: 11 };
 
+  // textContentType="name"
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <KeyboardAvoidingView
@@ -29,19 +32,27 @@ function SignUpFormTemplate({  }: SignUpFormTemplateProps) {
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
         style={{ flex: 1 }}>
         <Page>
-          <View style={{ height: 100 }} />
+          <BackButton onPress={() => onPressBack && onPressBack()} />
           <Title>Preencha os dados abaixo para continuar</Title>
           <Input
-            label="Nome completo"
-            placeholder="Seu nome completo"
-            textContentType="name"
-            innerref={register({ name: 'name' })}
-            onChangeText={text => setValue('name', text)}
+            label="Senha"
+            placeholder="Sua senha"
+            onChangeText={text => setValue('password', text)}
+            autoCompleteType="password"
             secureTextEntry
+            containerStyle={{ marginVertical: 11 }}
           />
-          <Input placeholder="00/00/00" label="Data de nascimento" />
-          <Input placeholder="000.000.000.00" label="CNH" />
-          <Button title="wa" />
+          <Input
+            placeholder="00/00/00"
+            label="Data de nascimento"
+            containerStyle={inputStyle}
+          />
+          <Input
+            placeholder="000.000.000.00"
+            label="CNH"
+            containerStyle={{ marginTop: 11, marginBottom: 22 }}
+          />
+          <Button title="Confirmar dados" />
           <View style={{ flex: 1 }} />
         </Page>
       </KeyboardAvoidingView>
@@ -49,6 +60,8 @@ function SignUpFormTemplate({  }: SignUpFormTemplateProps) {
   );
 }
 
-SignUpFormTemplate.defaultProps = {} as Partial<SignUpFormTemplateProps>;
+SignUpFormTemplate.defaultProps = {
+  onPressBack() {},
+} as Partial<SignUpFormTemplateProps>;
 
 export default SignUpFormTemplate;

@@ -53,6 +53,7 @@ function Input({
             <Icon name="remove-red-eye" size={24} />
           </PasswordViewerButton>
         ) : null}
+
         {label ? <Label>{label}</Label> : null}
 
         <StyledInput
@@ -71,6 +72,7 @@ function Input({
           placeholderTextColor={colors.black.inactive}
           secureTextEntry={hidingPassword}
         />
+
         {assistiveText ? (
           <StyledText ref={innerref} style={assistiveTextStyle}>
             {assistiveText}
