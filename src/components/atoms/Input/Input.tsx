@@ -9,6 +9,7 @@ import {
 } from './Input.styles';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import colors from '../../../styles/colors';
+import { ThemeProvider } from 'styled-components';
 
 type innerrefType = (ref: unknown) => void;
 
@@ -18,6 +19,7 @@ interface InputProps extends TextInputProperties {
   onChangeText: (text: string) => void;
   containerStyle?: ViewStyle;
   style?: TextStyle;
+  assistiveTextStyle?: TextStyle;
   innerref?: MutableRefObject<any> | innerrefType;
   error?: boolean;
   assistiveText?: string;
@@ -28,6 +30,7 @@ function Input({
   value,
   onChangeText,
   containerStyle,
+  assistiveTextStyle,
   style,
   innerref,
   error,
@@ -41,44 +44,40 @@ function Input({
   const [hidingPassword, setHidingPassword] = useState(secureTextEntry);
 
   return (
-    <InputView style={containerStyle}>
-      {secureTextEntry ? (
-        <PasswordViewerButton
-          onPress={() => setHidingPassword(!hidingPassword)}>
-          <Icon name="remove-red-eye" size={24} />
-        </PasswordViewerButton>
-      ) : null}
-      {label ? (
-        <Label error={error} focus={focus} editable={editable}>
-          {label}
-        </Label>
-      ) : null}
+    <ThemeProvider
+      theme={{ error, focus, editable, hasLabel: label && label.length > 0 }}>
+      <InputView style={containerStyle}>
+        {secureTextEntry ? (
+          <PasswordViewerButton
+            onPress={() => setHidingPassword(!hidingPassword)}>
+            <Icon name="remove-red-eye" size={24} />
+          </PasswordViewerButton>
+        ) : null}
+        {label ? <Label>{label}</Label> : null}
 
-      <StyledInput
-        ref={innerref}
-        {...props}
-        style={overloadStyle}
-        onChangeText={text => onChangeText && onChangeText(text)}
-        onFocus={() => {
-          setFocus(true);
-        }}
-        onBlur={() => {
-          setFocus(false);
-        }}
-        value={value}
-        focus={focus}
-        error={error}
-        editable={editable}
-        hasLabel={label && label.length > 0}
-        placeholderTextColor={colors.black.inactive}
-        secureTextEntry={hidingPassword}
-      />
-      {assistiveText ? (
-        <StyledText ref={innerref} style={overloadStyle} error={error}>
-          {assistiveText}
-        </StyledText>
-      ) : null}
-    </InputView>
+        <StyledInput
+          ref={innerref}
+          {...props}
+          style={overloadStyle}
+          onChangeText={text => onChangeText && onChangeText(text)}
+          onFocus={() => {
+            setFocus(true);
+          }}
+          onBlur={() => {
+            setFocus(false);
+          }}
+          value={value}
+          editable={editable}
+          placeholderTextColor={colors.black.inactive}
+          secureTextEntry={hidingPassword}
+        />
+        {assistiveText ? (
+          <StyledText ref={innerref} style={assistiveTextStyle}>
+            {assistiveText}
+          </StyledText>
+        ) : null}
+      </InputView>
+    </ThemeProvider>
   );
 }
 Input.defaultProps = {

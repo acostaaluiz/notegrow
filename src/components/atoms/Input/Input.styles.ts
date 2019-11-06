@@ -2,6 +2,15 @@ import styled from 'styled-components/native';
 import colors from '../../../styles/colors';
 import { fonts, styledfont } from '../../../styles/fonts';
 
+interface InputTheme {
+  theme: {
+    focus?: boolean,
+    editable?: boolean,
+    error?: boolean,
+    hasLabel?: boolean | string
+  }
+}
+
 export const InputView = styled.View`
   position: relative;
 `;
@@ -31,14 +40,14 @@ const renderInputColor = (error?: boolean, focus?: boolean) => {
   return colors.black.active;
 }
 
-export const StyledInput = styled.TextInput<{ focus?: boolean, error?: boolean, hasLabel?: boolean | string }>`
+export const StyledInput = styled.TextInput<InputTheme>`
   ${styledfont.subtitle1}
   width: 100%;
-  padding: ${ ({ hasLabel }) => hasLabel ? 32 : 16}px 10px 10px;
+  padding: ${ ({ theme: { hasLabel } }) => hasLabel ? 32 : 16}px 10px 10px;
   border: solid ${colors.blue.primary};
-  border-color: ${({ error, editable, focus }) => renderBorder(error, editable, focus)};
-  background-color: ${({ focus }) => focus ? 'transparent' : colors.blue.primaryopc15};
-  color: ${({ error, focus }) => renderInputColor(error, focus)};
+  border-color: ${({ theme: { error, editable, focus } }) => renderBorder(error, editable, focus)};
+  background-color: ${({ theme: { focus } }) => focus ? 'transparent' : colors.blue.primaryopc15};
+  color: ${({ theme: { error, focus } }) => renderInputColor(error, focus)};
   border-radius: 8px;
 `;
 
@@ -52,8 +61,8 @@ const renderLabelColor = (error?: boolean, editable?: boolean, focus?: boolean) 
   return colors.blue.primary;
 }
 
-export const Label = styled.Text<{ editable?: boolean; focus?: boolean; error?: boolean }>`
-  color: ${({ error, editable, focus }) => renderLabelColor(error, editable, focus)};
+export const Label = styled.Text<InputTheme>`
+  color: ${({ theme: { error, editable, focus } }) => renderLabelColor(error, editable, focus)};
   font-family: ${fonts.roboto.regular};
   font-size: 12px;
   letter-spacing: 0.4;
@@ -63,9 +72,9 @@ export const Label = styled.Text<{ editable?: boolean; focus?: boolean; error?: 
   left: 10px;
 `;
 
-export const StyledText = styled.Text<{ error?: boolean }>`
+export const StyledText = styled.Text<InputTheme>`
   width: 100%;
   padding: 3px 3px 0;
   margin-left: 16px;
-  color: ${({ error }) => error ? colors.red.primary : colors.blue.primary};
+  color: ${({ theme: { error } }) => error ? colors.red.primary : colors.blue.primary};
 `;
