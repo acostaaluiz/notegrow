@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import useForm from 'react-hook-form';
-import { Page, Title } from './SignUpFormTemplate.styled';
-import { Input, Button, BackButton } from '../../atoms';
+import { Page, Title, ImageContainer } from './SignUpFormTemplate.styled';
+import { Input, Button, BackButton, Image } from '../../atoms';
 import {
   KeyboardAvoidingView,
   Platform,
@@ -36,13 +36,28 @@ function SignUpFormTemplate({ onPressBack }: SignUpFormTemplateProps) {
   const [dateSelecting, setDateSelecting] = useState(false);
   const maxDate = date18YearsAgo();
 
-  const { register, setValue, handleSubmit, errors, getValues } = useForm<
-    FormType
-  >();
-  const { birthday } = getValues();
+  const {
+    register,
+    setValue,
+    handleSubmit,
+    errors,
+    watch,
+    clearError,
+  } = useForm<FormType>();
+
+  const fullname = watch('cnh') as string;
+  const birthday = watch('birthday') as Date;
+  const cnh = watch('cnh') as string;
+
+  const disableButton = (!fullname ||
+    (fullname && !fullname.length) ||
+    !birthday ||
+    (!cnh || (cnh && !cnh)) ||
+    errors.fullname ||
+    errors.birthday ||
+    errors.cnh) as boolean;
 
   const onSubmit = (data: any) => Alert.alert('Data', JSON.stringify(data));
-
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <KeyboardAvoidingView
@@ -52,6 +67,9 @@ function SignUpFormTemplate({ onPressBack }: SignUpFormTemplateProps) {
         <Page>
           <BackButton onPress={() => onPressBack && onPressBack()} />
           <Title>Preencha os dados abaixo para continuar</Title>
+          <ImageContainer>
+            <Image name="abstract3" width="360" height="238" />
+          </ImageContainer>
           <Input
             label="Nome completo"
             placeholder="Seu nome completo"
@@ -61,6 +79,10 @@ function SignUpFormTemplate({ onPressBack }: SignUpFormTemplateProps) {
               { name: 'fullname' },
               {
                 required: 'Preencha seu nome completo',
+                pattern: {
+                  value: /[A-Za-zÀ-ÖØ-öø-ÿ]+(\s[A-Za-zÀ-ÖØ-öø-ÿ]){1,}/,
+                  message: 'Preencha seu nome completo',
+                },
                 minLength: {
                   value: 3,
                   message: 'Escreva seu nome todo',
@@ -68,7 +90,10 @@ function SignUpFormTemplate({ onPressBack }: SignUpFormTemplateProps) {
               },
             )}
             error={errors.fullname && errors.fullname.message}
-            onChangeText={text => setValue('fullname', text)}
+            onChangeText={text => {
+              setValue('fullname', text);
+              clearError('fullname');
+            }}
           />
           <Input
             value={birthday ? parseDate(birthday) : undefined}
@@ -81,7 +106,9 @@ function SignUpFormTemplate({ onPressBack }: SignUpFormTemplateProps) {
             )}
             onFocus={() => {
               Keyboard.dismiss();
-              setDateSelecting(true);
+              if (!dateSelecting) {
+                setDateSelecting(true);
+              }
             }}
             showSoftInputOnFocus={false}
             error={errors.birthday && errors.birthday.message}
@@ -90,41 +117,55 @@ function SignUpFormTemplate({ onPressBack }: SignUpFormTemplateProps) {
             placeholder="000.000.000.00"
             label="CNH"
             containerStyle={{ marginTop: 11, marginBottom: 22 }}
+            type="custom"
+            options={{ mask: '999.999.999.99' }}
             keyboardType="number-pad"
+            value={cnh}
             innerref={register(
               { name: 'cnh' },
               {
-                required: true,
+                required: 'Digite o CNH',
                 minLength: {
-                  value: 13,
-                  message: 'Digite todos os numeros e pontos do CNH',
+                  value: 14,
+                  message: 'Digite todos os números do CNH',
                 },
                 maxLength: {
-                  value: 13,
-                  message: 'Digite todos os numeros e pontos do CNH',
-                },
-                pattern: {
-                  value: /\d{3}.\d{3}\d{3}.\d{2}/,
-                  message: 'Seu CNH está fora do padrão',
+                  value: 14,
+                  message: 'Digite todos os números do CNH',
                 },
               },
             )}
             error={errors.cnh && errors.cnh.message}
-            onChangeText={text => setValue('cnh', text)}
-          />
-          <Button title="Confirmar dados" onPress={handleSubmit(onSubmit)} />
-          <DatePickerModal
-            date={birthday}
-            isVisible={dateSelecting}
-            onConfirm={date => {
-              setValue('birthday', date);
-              setDateSelecting(false);
+            onChangeText={text => {
+              setValue('cnh', text);
+              clearError('cnh');
             }}
-            onCancel={() => {
-              setDateSelecting(false);
-            }}
-            maximumDate={maxDate}
           />
+
+          <Button
+            title="Confirmar dados"
+            disabled={disableButton}
+            onPress={handleSubmit(onSubmit)}
+          />
+
+          {dateSelecting && (
+            <DatePickerModal
+              date={birthday}
+              isVisible={dateSelecting}
+              maximumDate={maxDate}
+              onConfirm={date => {
+                setValue('birthday', date);
+                clearError('birthday');
+                setDateSelecting(false);
+              }}
+              onCancel={() => {
+                setDateSelecting(false);
+              }}
+              onHide={() => {
+                setDateSelecting(false);
+              }}
+            />
+          )}
           <View style={{ flex: 1 }} />
         </Page>
       </KeyboardAvoidingView>
