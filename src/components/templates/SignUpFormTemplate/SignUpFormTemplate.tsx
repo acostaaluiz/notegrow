@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useForm from 'react-hook-form';
 import { Page, Title } from './SignUpFormTemplate.styled';
 import { Input, Button, BackButton } from '../../atoms';
@@ -18,16 +18,28 @@ interface SignUpFormTemplateProps {
 
 interface FormType {
   name: string;
-  birthay: Date;
+  birthday: Date;
   cnh: string;
 }
 
 const inputStyle = { marginVertical: 11 };
 
+function date18YearsAgo() {
+  const today = new Date();
+  return new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+}
+
+const parseDate = (date: Date) =>
+  `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+
 function SignUpFormTemplate({ onPressBack }: SignUpFormTemplateProps) {
+  const [dateSelecting, setDateSelecting] = useState(false);
+  const maxDate = date18YearsAgo();
+
   const { register, setValue, handleSubmit, errors, getValues } = useForm<
     FormType
   >();
+  const { birthday } = getValues();
 
   const onSubmit = (data: any) => Alert.alert('Data', JSON.stringify(data));
 
@@ -59,6 +71,7 @@ function SignUpFormTemplate({ onPressBack }: SignUpFormTemplateProps) {
             onChangeText={text => setValue('fullname', text)}
           />
           <Input
+            value={birthday ? parseDate(birthday) : undefined}
             placeholder="00/00/00"
             label="Data de nascimento"
             containerStyle={inputStyle}
@@ -66,9 +79,12 @@ function SignUpFormTemplate({ onPressBack }: SignUpFormTemplateProps) {
               { name: 'birthday' },
               { required: 'Selecione seu aniversário' },
             )}
-            onFocus={() => Keyboard.dismiss()}
+            onFocus={() => {
+              Keyboard.dismiss();
+              setDateSelecting(true);
+            }}
+            showSoftInputOnFocus={false}
             error={errors.birthday && errors.birthday.message}
-            onChangeText={text => setValue('birthday', text)}
           />
           <Input
             placeholder="000.000.000.00"
@@ -97,7 +113,18 @@ function SignUpFormTemplate({ onPressBack }: SignUpFormTemplateProps) {
             onChangeText={text => setValue('cnh', text)}
           />
           <Button title="Confirmar dados" onPress={handleSubmit(onSubmit)} />
-          {/* <DatePickerModal  /> */}
+          <DatePickerModal
+            date={birthday}
+            isVisible={dateSelecting}
+            onConfirm={date => {
+              setValue('birthday', date);
+              setDateSelecting(false);
+            }}
+            onCancel={() => {
+              setDateSelecting(false);
+            }}
+            maximumDate={maxDate}
+          />
           <View style={{ flex: 1 }} />
         </Page>
       </KeyboardAvoidingView>

@@ -15,16 +15,14 @@ type innerrefType = (ref: unknown) => void;
 
 interface InputProps extends TextInputProperties {
   label: string;
-  value: string;
-  onChangeText: (text: string) => void;
   containerStyle?: ViewStyle;
-  style?: TextStyle;
   assistiveTextStyle?: TextStyle;
   innerref?: MutableRefObject<any> | innerrefType | void;
   error?: boolean | string;
   assistiveText?: string;
-  editable?: boolean;
+  showSoftInputOnFocus?: boolean;
 }
+
 function Input({
   label,
   value,
