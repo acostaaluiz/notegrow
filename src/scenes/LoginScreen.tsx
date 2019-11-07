@@ -15,14 +15,16 @@ function LoginScreen({ navigation }: LoginScreen) {
   const dispatch = useDispatch();
   const requestLogin = doLogin(dispatch);
 
-  const onSubmit = (username: string, password: string) => {
-    requestLogin(username, password);
+  const onSubmit = (userName: string) => {
+    requestLogin(userName);
     Keyboard.dismiss();
+
   };
 
   useEffect(() => {
+    console.log('login: ' + JSON.stringify(data));
     if (data) {
-      navigation.navigate('Home');
+      navigation.navigate('LoginPassword');
     }
   }, [data]);
 

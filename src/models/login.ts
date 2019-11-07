@@ -4,6 +4,7 @@ export interface LoginInterface {
     token_type: string;
     expires_in: Number;
     userName: string;
+    password: string;
 
 }
 
@@ -14,6 +15,7 @@ export default function LoginModel(data: any | LoginInterface): LoginInterface |
         access_token: data.access_token || '',
         token_type: data.token_type || '',
         expires_in: data.expires_in || '',
-        userName: data.userName || ''
+        userName: data.userName || '',
+        password: data.password || ''
     }
 }

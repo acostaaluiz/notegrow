@@ -1,9 +1,10 @@
 import { Dispatch } from 'redux';
 import { ActionPayload } from '../../interfaces/redux';
 import { LOGIN_FETCH_PENDING, LOGIN_FETCH_SUCCESS, LOGIN_LOGOFF, LOGIN_SAVEPREFERENCES_PENDING, LOGIN_SAVEPREFERENCES_SUCCESS, LOGIN_SAVEPREFERENCES_ERROR } from '../types';
-import { login } from '../../services/login';
 import LoginModel, { LoginInterface } from '../../models/login';
+import { login } from '../../services/login';
 import { LoginReducerState } from '../reducers/LoginReducer';
+import { userInfo } from 'os';
 
 export type HomeActionTypes = ActionPayload<LoginReducerState>;
 
@@ -32,10 +33,26 @@ export function savePreferences(dispatch: Dispatch) {
 }
 
 export function doLogin(dispatch: Dispatch) {
-  return async (username: string, password: string) => {
+  return async (userName: string) => {
     dispatch(loginFetchPending())
 
-    const data = await login(username, password);
+    const data = getLoginObj(userName);
+    const loginModel = LoginModel(data);
+
+    if (loginModel) {
+      dispatch(loginFetchSuccess(loginModel))
+    }
+    else {
+      // ...
+    }
+  }
+}
+
+export function doLoginService(dispatch: Dispatch) {
+  return async (userName: string, password: string) => {
+    dispatch(loginFetchPending())
+
+    const data = await login(userName, password);
     const loginModel = LoginModel(data);
 
     if (loginModel) {
@@ -49,5 +66,15 @@ export function doLogin(dispatch: Dispatch) {
 
 export function doLogoff(dispatch: Dispatch) {
   dispatch(logoff())
+}
+
+function getLoginObj(userName: string): LoginInterface {
+  return {
+    access_token: "",
+    token_type: "",
+    expires_in: 0,
+    userName: userName,
+    password: ""
+  }
 }
 

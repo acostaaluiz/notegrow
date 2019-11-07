@@ -1,88 +1,59 @@
 import React, { useState, useRef } from 'react';
-import {
-  Button,
-  KeyboardAvoidingView,
-  Text,
-  Keyboard,
-  TouchableWithoutFeedback,
-  TextInput,
-} from 'react-native';
-import { Input } from '../../atoms';
+import { View, TextInput } from 'react-native';
+import { WhiteBackground, Title, ImageBackground } from './LoginTemplate.styled';
+import { Input, Button, Image, StatusBarComponent } from '../../atoms';
 
 interface LoginTemplateProps {
   pending: boolean;
-  onSubmit: (username: string, password: string) => void;
+  onSubmit: (username: string) => void;
 }
 
 function LoginTemplate({ pending, onSubmit }: LoginTemplateProps) {
   const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
   const usernameInput = useRef<TextInput>();
-  const passwordInput = useRef<TextInput>();
 
   const submit = () => {
     if (!username || (username && !username.length)) {
       usernameInput.current!.focus();
       return;
     }
-    if (!password || (password && !password.length)) {
-      passwordInput.current!.focus();
-      return;
-    }
-    onSubmit(username, password);
+    onSubmit(username);
   };
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <KeyboardAvoidingView
-        style={{
-          flex: 1,
-          paddingTop: 50,
-          width: '100%',
-          paddingLeft: 20,
-          paddingRight: 20,
-        }}
-        behavior="padding">
-        <Text
-          style={{
-            fontSize: 24,
-            marginBottom: 40,
-            fontWeight: 'bold',
-            textAlign: 'center',
-          }}>
-          Votorantim Cimentos
-        </Text>
-        <Input
-          value={username}
-          autoCapitalize="none"
-          autoFocus
-          onChangeText={text => setUsername(text)}
-          placeholder="Usuário"
-          onSubmitEditing={submit}
-          innerref={usernameInput}
-          style={{ marginBottom: 10 }}
-        />
-        <Input
-          innerref={passwordInput}
-          value={password}
-          autoCapitalize="none"
-          textContentType="password"
-          secureTextEntry
-          onChangeText={text => setPassword(text)}
-          placeholder="Senha"
-          onSubmitEditing={submit}
-          style={{ marginBottom: 10 }}
-        />
-        <Button title="Login" onPress={submit} disabled={pending} />
-        {pending && <Text>Carregando...</Text>}
-      </KeyboardAvoidingView>
-    </TouchableWithoutFeedback>
+    <>
+      <StatusBarComponent />
+      <WhiteBackground>
+        <View>
+          <Image width="56px" height="16px" name="logo" />
+          <Title>Digite seu CPF para começar</Title>
+          <Input
+            style={{ marginTop: 50 }}
+            value={username}
+            autoCapitalize="none"
+            autoFocus
+            onChangeText={text => setUsername(text)}
+            placeholder="000.000.000-00"
+            onSubmitEditing={submit}
+            innerref={usernameInput}
+          />
+          <Button
+            style={{ marginTop: 36, marginBottom: 300, alignSelf: "flex-end" }}
+            icon={"arrow-forward"}
+            onPress={submit} />
+        </View>
+        <ImageBackground>
+          <Image name="abstract1" width="360" height="238" />
+        </ImageBackground>
+      </WhiteBackground>
+
+    </>
   );
 }
 
 LoginTemplate.defaultProps = {
   pending: false,
-  onSubmit(username: string, password: string) { },
+  onSubmit(username: string) { },
 } as Partial<LoginTemplateProps>;
 
 export default LoginTemplate;

@@ -15,7 +15,7 @@ function AuthGuard({
   const login = useSelector(({ login }: AppState) => login.data);
   useEffect(() => {
     if (!login) {
-      navigation.navigate('Login');
+      navigation.navigate('LoginDocument');
     }
   }, [login]);
 
