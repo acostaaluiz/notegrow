@@ -1,19 +1,31 @@
 import React, { MutableRefObject, useState } from 'react';
-import { TextInputProperties, TextStyle, ViewStyle } from 'react-native';
+import {
+  TextStyle,
+  ViewStyle,
+  NativeSyntheticEvent,
+  TextInputFocusEventData,
+} from 'react-native';
 import {
   StyledInput,
   StyledText,
   Label,
   InputView,
   PasswordViewerButton,
+  StyledInputMask,
 } from './Input.styles';
+import {
+  TextInputMaskProps,
+  TextInputMaskTypeProp,
+} from 'react-native-masked-text';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import colors from '../../../styles/colors';
 import { ThemeProvider } from 'styled-components';
 
 type innerrefType = (ref: unknown) => void;
 
-interface InputProps extends TextInputProperties {
+interface InputProps
+  extends Pick<TextInputMaskProps, Exclude<keyof TextInputMaskProps, 'type'>> {
+  type?: TextInputMaskTypeProp;
   label: string;
   containerStyle?: ViewStyle;
   assistiveTextStyle?: TextStyle;
@@ -25,7 +37,7 @@ interface InputProps extends TextInputProperties {
 
 function Input({
   label,
-  value,
+  type,
   onChangeText,
   containerStyle,
   assistiveTextStyle,
@@ -42,6 +54,27 @@ function Input({
   const overloadStyle = style || {};
   const [focus, setFocus] = useState(false);
   const [hidingPassword, setHidingPassword] = useState(secureTextEntry);
+
+  const OnChangeProp = (text: string, raw?: string) => {
+    if (onChangeText) {
+      onChangeText(text, raw);
+    }
+  };
+
+  const onFocusProp = (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
+    setFocus(true);
+    if (onFocus) {
+      onFocus(e);
+    }
+  };
+
+  const onBlurProp = (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
+    setFocus(false);
+    if (onBlur) {
+      onBlur(e);
+    }
+  };
+
   return (
     <ThemeProvider
       theme={{ error, focus, editable, hasLabel: label && label.length > 0 }}>
@@ -55,28 +88,32 @@ function Input({
 
         {label ? <Label>{label}</Label> : null}
 
-        <StyledInput
-          ref={innerref as any}
-          {...props}
-          style={overloadStyle}
-          onChangeText={text => onChangeText && onChangeText(text)}
-          onFocus={e => {
-            setFocus(true);
-            if (onFocus) {
-              onFocus(e);
-            }
-          }}
-          onBlur={e => {
-            setFocus(false);
-            if (onBlur) {
-              onBlur(e);
-            }
-          }}
-          value={value}
-          editable={editable}
-          placeholderTextColor={colors.black.inactive}
-          secureTextEntry={hidingPassword}
-        />
+        {type ? (
+          <StyledInputMask
+            {...props}
+            type={type}
+            refInput={innerref as any}
+            style={overloadStyle}
+            onChangeText={OnChangeProp}
+            onFocus={onFocusProp}
+            onBlur={onBlurProp}
+            editable={editable}
+            placeholderTextColor={colors.black.inactive}
+            secureTextEntry={hidingPassword}
+          />
+        ) : (
+          <StyledInput
+            ref={innerref as any}
+            {...props}
+            style={overloadStyle}
+            onChangeText={OnChangeProp}
+            onFocus={onFocusProp}
+            onBlur={onBlurProp}
+            editable={editable}
+            placeholderTextColor={colors.black.inactive}
+            secureTextEntry={hidingPassword}
+          />
+        )}
 
         {assistiveText || error ? (
           <StyledText style={assistiveTextStyle}>

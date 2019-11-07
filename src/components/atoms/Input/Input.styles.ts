@@ -1,6 +1,7 @@
-import styled from 'styled-components/native';
+import styled, { css } from 'styled-components/native';
 import colors from '../../../styles/colors';
 import { fonts, styledfont } from '../../../styles/fonts';
+import { TextInputMask } from 'react-native-masked-text';
 
 interface InputTheme {
   theme: {
@@ -40,7 +41,7 @@ const renderInputColor = (error?: boolean, focus?: boolean) => {
   return colors.black.active;
 }
 
-export const StyledInput = styled.TextInput<InputTheme>`
+const InputStyle = css<InputTheme>`
   ${styledfont.subtitle1}
   width: 100%;
   padding: ${ ({ theme: { hasLabel } }) => hasLabel ? 32 : 16}px 10px 10px;
@@ -50,6 +51,16 @@ export const StyledInput = styled.TextInput<InputTheme>`
   color: ${({ theme: { error, focus } }) => renderInputColor(error, focus)};
   border-radius: 8px;
 `;
+
+export const StyledInput = styled.TextInput<InputTheme>`
+  ${InputStyle}
+`;
+
+export const StyledInputMask = styled(TextInputMask) <InputTheme>`
+  ${InputStyle}
+`;
+
+TextInputMask
 
 const renderLabelColor = (error?: boolean, editable?: boolean, focus?: boolean) => {
   if (!editable) {
