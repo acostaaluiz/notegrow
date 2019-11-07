@@ -1,14 +1,12 @@
 import { combineReducers } from 'redux';
 import { reducer as network } from 'react-native-offline';
 import LoginReducer from './LoginReducer';
-import LoginPasswordReducer from './LoginPasswordReducer';
 import UserReducer from './UserReducer';
 import PreferencesReducer from './PreferencesReducer';
 import FAQReducer from './FAQReducer';
 
 const rootReducer = combineReducers({
   login: LoginReducer,
-  loginPassword: LoginPasswordReducer,
   user: UserReducer,
   preferences: PreferencesReducer,
   faq: FAQReducer,

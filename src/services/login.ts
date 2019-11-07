@@ -3,6 +3,15 @@ import API from "../utils/api";
 
 const { SECRET_KEY } = Config;
 
+export function loginExists(user: string) {
+
+    const headers = new Headers({
+        'Content-Type': 'application/json'
+    });
+
+    return API.get('motoristas/cpf/' + user, 'existe');
+}
+
 export function login(user: string, password: string) {
 
     //RequestBody end-point auth/token/

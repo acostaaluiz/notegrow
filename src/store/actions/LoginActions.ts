@@ -2,7 +2,7 @@ import { Dispatch } from 'redux';
 import { ActionPayload } from '../../interfaces/redux';
 import { LOGIN_FETCH_PENDING, LOGIN_FETCH_SUCCESS, LOGIN_LOGOFF, LOGIN_SAVEPREFERENCES_PENDING, LOGIN_SAVEPREFERENCES_SUCCESS, LOGIN_SAVEPREFERENCES_ERROR } from '../types';
 import LoginModel, { LoginInterface } from '../../models/login';
-import { login } from '../../services/login';
+import { login, loginExists } from '../../services/login';
 import { LoginReducerState } from '../reducers/LoginReducer';
 import { userInfo } from 'os';
 
@@ -64,17 +64,31 @@ export function doLoginService(dispatch: Dispatch) {
   }
 }
 
+export function checkDocument(dispatch: Dispatch) {
+  return async (userName: string) => {
+    dispatch(loginFetchPending())
+
+    console.log(userName);
+    const data = await loginExists(userName);
+
+    console.log('alou: ' + JSON.stringify(data));
+
+    /*if (loginModel) {
+      dispatch(loginFetchSuccess(loginModel))
+    }
+    else {
+      // ...
+    }*/
+  }
+}
+
 export function doLogoff(dispatch: Dispatch) {
   dispatch(logoff())
 }
 
-function getLoginObj(userName: string): LoginInterface {
+function getLoginObj(userName: string): Partial<LoginInterface> {
   return {
-    access_token: "",
-    token_type: "",
-    expires_in: 0,
-    userName: userName,
-    password: ""
+    userName: userName
   }
 }
 

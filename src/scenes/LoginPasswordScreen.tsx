@@ -3,7 +3,7 @@ import { Keyboard, Text } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavigationPageProp } from '../interfaces/navigation';
 import { AppState } from '../store/reducers';
-import { doLoginService } from '../store/actions/LoginPasswordActions';
+import { doLoginService } from '../store/actions/LoginActions';
 import { LoginPasswordTemplate } from '../components/templates';
 
 interface LoginScreen {
@@ -11,20 +11,25 @@ interface LoginScreen {
 }
 
 function LoginPasswordScreen({ navigation }: LoginScreen) {
-    const login = useSelector(({ login }: AppState) => login.data);
-    const { pending, data } = useSelector(({ loginPassword }: AppState) => loginPassword);
+    const { pending, data } = useSelector(({ login }: AppState) => login);
     const dispatch = useDispatch();
     const requestLogin = doLoginService(dispatch);
 
     const onSubmit = (password: string) => {
-        requestLogin(login.userName, password);
-
-        if (data) {
-            navigation.navigate('Home');
-        }
+        const document = navigation.getParam('document');
+        requestLogin(document, password);
 
         Keyboard.dismiss();
+
+        console.log('document: ' + document);
     };
+
+    useEffect(() => {
+        if (data) {
+            console.log('data: ' + JSON.stringify(data));
+            navigation.navigate('Home');
+        }
+    }, [data]);
 
     return <LoginPasswordTemplate pending={pending} onSubmit={onSubmit} />;
 }

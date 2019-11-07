@@ -3,13 +3,14 @@ import { View, TextInput } from 'react-native';
 import { WhiteBackground, Title, ImageBackground } from './LoginTemplate.styled';
 import { Input, Button, Image, StatusBarComponent } from '../../atoms';
 
+
 interface LoginTemplateProps {
-  pending: boolean;
-  onSubmit: (username: string) => void;
+  onSubmit: (username: string, password: string) => void;
 }
 
-function LoginTemplate({ pending, onSubmit }: LoginTemplateProps) {
+function LoginTemplate({ onSubmit }: LoginTemplateProps) {
   const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const usernameInput = useRef<TextInput>();
 
   const submit = () => {
@@ -17,7 +18,7 @@ function LoginTemplate({ pending, onSubmit }: LoginTemplateProps) {
       usernameInput.current!.focus();
       return;
     }
-    onSubmit(username);
+    onSubmit(username, password);
   };
 
   return (

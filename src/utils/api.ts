@@ -15,6 +15,7 @@ const API = {
     const contentType = _response.headers.get('content-type');
 
     if (contentType && contentType.includes('application/json')) {
+      console.log('entrei 1');
       return _response.json();
     }
 
@@ -22,6 +23,9 @@ const API = {
   },
 
   get(endpoint: string, parameter?: string): Promise<any> {
+
+    console.log('request: ' + this.url + '/' + endpoint + '/' + parameter);
+
     return fetch(`${this.url}/${endpoint}/${parameter}`, {
       method: 'GET',
       headers: new Headers({
