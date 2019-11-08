@@ -1,48 +1,49 @@
 import Config from 'react-native-config';
-import API from "../utils/api";
+import API from '../utils/api';
 
 const { SECRET_KEY } = Config;
 
-export function loginExists(user: string) {
+export function loginExists(username: string) {
+  const headers = new Headers({
+    'Content-Type': 'application/json',
+  });
 
-    const headers = new Headers({
-        'Content-Type': 'application/json'
-    });
-
-    return API.get('motoristas/cpf/08015505992/existe');
+  // TODO: REMOVE
+  // debug
+  if (username === '0') {
+    return API.get(`motoristas/cpf/08015505992/existe`);
+  }
+  return API.get(`motoristas/cpf/${username}/existe`);
 }
 
 export function login(user: string, password: string) {
+  //RequestBody end-point auth/token/
+  const grant_type = 'grant_type=password&username=09503054990&password=abc123';
 
-    //RequestBody end-point auth/token/
-    const grant_type = 'grant_type=password&username=09503054990&password=abc123';
+  const headers = new Headers({
+    'Content-Type': 'application/json',
+    'Cache-Control': 'no-cache',
+  });
 
-    const headers = new Headers({
-        'Content-Type': 'application/json',
-        'Cache-Control': 'no-cache'
-    });
-
-    return API.post('auth/token', { grant_type }, headers);
+  return API.post('auth/token', { grant_type }, headers);
 }
 
 export function loginMock(user: string, password: string) {
+  //RequestBody end-point auth/token/
 
-    //RequestBody end-point auth/token/
+  const headers = new Headers({
+    'Content-Type': 'application/json',
+  });
 
-    const headers = new Headers({
-        'Content-Type': 'application/json'
-    });
-
-    return API.getMock('login');
+  return API.getMock('login');
 }
 
 export function loginMockError(user: string, password: string) {
+  //RequestBody end-point auth/token/
 
-    //RequestBody end-point auth/token/
+  const headers = new Headers({
+    'Content-Type': 'application/json',
+  });
 
-    const headers = new Headers({
-        'Content-Type': 'application/json'
-    });
-
-    return API.getMock('loginFailed');
+  return API.getMock('loginFailed');
 }

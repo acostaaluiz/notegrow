@@ -1,32 +1,38 @@
-import React, { useEffect } from 'react';
-import { Keyboard, Text } from 'react-native';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState } from 'react';
+import { Keyboard } from 'react-native';
 import { NavigationPageProp } from '../interfaces/navigation';
-import { AppState } from '../store/reducers';
-import { checkDocument } from '../store/actions/LoginActions';
 import { LoginTemplate } from '../components/templates';
+import { loginExists } from '../services/login';
 
 interface LoginScreen {
   navigation: NavigationPageProp;
 }
 
 function LoginScreen({ navigation }: LoginScreen) {
-  const { data } = useSelector(({ login }: AppState) => login);
-  const dispatch = useDispatch();
-  const checkLogin = checkDocument(dispatch);
+  const [loading, setLoading] = useState(false);
 
-  const onSubmit = (username: string) => {
-    checkLogin(username);
+  const onSubmit = (cpf: string) => {
+    const username = cpf.replace(/\.?\-?/g, '');
+
+    setLoading(true);
+
+    loginExists(username)
+      .then((status: string) => {
+        setLoading(false);
+        if (status == '200' || status) {
+          navigation.navigate('LoginPassword', { document: username });
+        } else {
+          navigation.navigate('SignUp');
+        }
+      })
+      .catch(error => {
+        setLoading(false);
+        navigation.navigate('SignUp');
+      });
     Keyboard.dismiss();
   };
 
-  useEffect(() => {
-    if (data && data.userName) {
-      navigation.navigate('LoginPassword', { document: data.userName });
-    }
-  }, [data]);
-
-  return <LoginTemplate onSubmit={onSubmit} />;
+  return <LoginTemplate loading={loading} onSubmit={onSubmit} />;
 }
 
 export default LoginScreen;

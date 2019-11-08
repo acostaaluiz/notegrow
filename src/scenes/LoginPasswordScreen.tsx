@@ -7,31 +7,36 @@ import { doLoginService } from '../store/actions/LoginActions';
 import { LoginPasswordTemplate } from '../components/templates';
 
 interface LoginPasswordScreen {
-    navigation: NavigationPageProp;
+  navigation: NavigationPageProp;
 }
 
 function LoginPasswordScreen({ navigation }: LoginPasswordScreen) {
-    const { pending, data } = useSelector(({ login }: AppState) => login);
-    const dispatch = useDispatch();
-    const requestLogin = doLoginService(dispatch);
+  const { pending, data } = useSelector(({ login }: AppState) => login);
+  const dispatch = useDispatch();
+  const requestLogin = doLoginService(dispatch);
 
-    const onSubmit = (password: string) => {
+  const onSubmit = (password: string) => {
+    const document = navigation.getParam('document');
+    console.log('document' + document);
+    requestLogin(document, password);
 
-        const document = navigation.getParam('document');
-        console.log('document' + document);
-        requestLogin(document, password);
+    Keyboard.dismiss();
+  };
 
-        Keyboard.dismiss();
-    };
+  useEffect(() => {
+    console.log('****************: ' + JSON.stringify(data));
+    if (data && data.access_token && data.access_token.length) {
+      navigation.navigate('Home');
+    }
+  }, [data]);
 
-    useEffect(() => {
-        console.log('****************: ' + JSON.stringify(data));
-        if (data && data.access_token && data.access_token.length) {
-            navigation.navigate('Home');
-        }
-    }, [data]);
-
-    return <LoginPasswordTemplate error={data.error_description} pending={pending} onSubmit={onSubmit} />;
+  return (
+    <LoginPasswordTemplate
+      error={data && data.error_description}
+      pending={pending}
+      onSubmit={onSubmit}
+    />
+  );
 }
 
 export default LoginPasswordScreen;

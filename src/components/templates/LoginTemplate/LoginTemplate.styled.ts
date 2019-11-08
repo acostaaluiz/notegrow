@@ -1,6 +1,6 @@
-import styled from "styled-components/native";
-import colors from "../../../styles/colors";
-import { styledfont } from "../../../styles/fonts";
+import styled from 'styled-components/native';
+import colors from '../../../styles/colors';
+import { styledfont } from '../../../styles/fonts';
 
 export const WhiteBackground = styled.View`
   background-color: ${colors.white.active};
@@ -11,8 +11,8 @@ export const WhiteBackground = styled.View`
 `;
 
 export const ImageBackground = styled.View`
-position: absolute;
-bottom: 0;
+  position: absolute;
+  bottom: 0;
 `;
 
 export const Title = styled.Text`
