@@ -16,10 +16,10 @@ export const InputView = styled.View`
   position: relative;
 `;
 
-export const PasswordViewerButton = styled.TouchableOpacity`
+export const PasswordViewerButton = styled.TouchableOpacity<InputTheme>`
   position: absolute;
   right: 0;
-  top: 23;
+  top: ${ ({ theme: { hasLabel } }) => hasLabel ? 32 : 0};
   padding: 15px 15px 10px;
   z-index: 100;
 `;
@@ -44,7 +44,7 @@ const renderInputColor = (error?: boolean, focus?: boolean) => {
 const InputStyle = css<InputTheme>`
   ${styledfont.subtitle1}
   width: 100%;
-  padding: ${ ({ theme: { hasLabel } }) => hasLabel ? 32 : 16}px 10px 10px;
+  padding: ${ ({ theme: { hasLabel } }) => hasLabel ? 32 : 10}px 10px 10px;
   border: solid ${colors.blue.primary};
   border-color: ${({ theme: { error, editable, focus } }) => renderBorder(error, editable, focus)};
   background-color: ${({ theme: { focus } }) => focus ? 'transparent' : colors.blue.primaryopc15};
