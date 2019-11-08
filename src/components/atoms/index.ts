@@ -6,3 +6,5 @@ export { default as StatusBarComponent } from './StatusBarComponent'
 export { default as CloseKeyboard } from './CloseKeyboard'
 export { default as BackButton } from './BackButton'
 
+export { default as LoadingModal } from './LoadingModal'
+
