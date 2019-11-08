@@ -1,8 +1,9 @@
 import { Dispatch } from 'redux';
 import { ActionPayload } from '../../interfaces/redux';
-import { LOGIN_FETCH_PENDING, LOGIN_FETCH_SUCCESS, LOGIN_LOGOFF, LOGIN_SAVEPREFERENCES_PENDING, LOGIN_SAVEPREFERENCES_SUCCESS, LOGIN_SAVEPREFERENCES_ERROR } from '../types';
+import { LOGIN_FETCH_PENDING, LOGIN_FETCH_SUCCESS, LOGIN_LOGOFF, LOGIN_SAVEPREFERENCES_PENDING, LOGIN_SAVEPREFERENCES_SUCCESS, LOGIN_SAVEPREFERENCES_ERROR, LOGIN_FETCH_ERROR } from '../types';
 import LoginModel, { LoginInterface } from '../../models/login';
-import { login, loginExists } from '../../services/login';
+import ErrorModel, { ErrorInterface } from '../../models/error';
+import { login, loginMock, loginExists, loginMockError } from '../../services/login';
 import { LoginReducerState } from '../reducers/LoginReducer';
 import { userInfo } from 'os';
 
@@ -16,6 +17,13 @@ function loginFetchSuccess(login: Partial<LoginInterface>) {
   return {
     type: LOGIN_FETCH_SUCCESS,
     payload: login
+  }
+}
+
+function loginFetchError(error: Partial<ErrorInterface>) {
+  return {
+    type: LOGIN_FETCH_ERROR,
+    error: error
   }
 }
 
@@ -35,17 +43,28 @@ export function savePreferences(dispatch: Dispatch) {
 export function doLoginService(dispatch: Dispatch) {
   return async (userName: string, password: string) => {
     dispatch(loginFetchPending())
-    console.log('loguei');
-    const data = await login(userName, password);
-    console.log('login: ' + JSON.stringify(data));
-    const loginModel = LoginModel(data);
 
-    if (loginModel) {
-      dispatch(loginFetchSuccess(loginModel))
+    const data = await loginMockError(userName, password);
+
+    if (data.error == "invalid_grant") {
+      const errorModel = ErrorModel(data);
+      console.log('errorModel: ' + JSON.stringify(errorModel));
+      if (errorModel)
+        dispatch(loginFetchError(errorModel));
+
+    } else {
+      const loginModel = LoginModel(data);
+
+      if (loginModel) {
+        dispatch(loginFetchSuccess(loginModel))
+      }
+      else {
+        // ...
+      }
     }
-    else {
-      // ...
-    }
+
+
+
   }
 }
 
@@ -56,7 +75,7 @@ export function checkDocument(dispatch: Dispatch) {
     const data = await loginExists(userName);
     let access;
 
-    if (data == '200')
+    if (data == '200' || data)
       access = true;
     else
       access = false;

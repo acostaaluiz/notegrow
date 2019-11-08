@@ -26,12 +26,12 @@ function LoginPasswordScreen({ navigation }: LoginPasswordScreen) {
 
     useEffect(() => {
         console.log('****************: ' + JSON.stringify(data));
-        if (data && data.access_token && data.access_token.lenght) {
+        if (data && data.access_token && data.access_token.length) {
             navigation.navigate('Home');
         }
     }, [data]);
 
-    return <LoginPasswordTemplate pending={pending} onSubmit={onSubmit} />;
+    return <LoginPasswordTemplate error={data.error_description} pending={pending} onSubmit={onSubmit} />;
 }
 
 export default LoginPasswordScreen;

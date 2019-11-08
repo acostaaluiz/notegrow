@@ -15,11 +15,34 @@ export function loginExists(user: string) {
 export function login(user: string, password: string) {
 
     //RequestBody end-point auth/token/
-    const grant_type = JSON.stringify('grant_type=password&username=' + user + '&password=' + password);
+    const grant_type = 'grant_type=password&username=09503054990&password=abc123';
+
+    const headers = new Headers({
+        'Content-Type': 'application/json',
+        'Cache-Control': 'no-cache'
+    });
+
+    return API.post('auth/token', { grant_type }, headers);
+}
+
+export function loginMock(user: string, password: string) {
+
+    //RequestBody end-point auth/token/
 
     const headers = new Headers({
         'Content-Type': 'application/json'
     });
 
-    return API.post('login', { user, password });
+    return API.getMock('login');
+}
+
+export function loginMockError(user: string, password: string) {
+
+    //RequestBody end-point auth/token/
+
+    const headers = new Headers({
+        'Content-Type': 'application/json'
+    });
+
+    return API.getMock('loginFailed');
 }
