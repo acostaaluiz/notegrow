@@ -17,23 +17,29 @@ import {
   StatusBarComponent,
   LoadingModal,
 } from '../../atoms';
+import useForm from 'react-hook-form';
 
 interface LoginTemplateProps {
   loading: boolean;
-  onSubmit: (username: string) => void;
+  onSubmit: (cpf: string) => void;
 }
 
 function LoginTemplate({ onSubmit, loading }: LoginTemplateProps) {
-  const [username, setUsername] = useState('');
-  const usernameInput = useRef<TextInput>();
-  const hasUsername = username && username.length;
+  const {
+    register,
+    setValue,
+    errors,
+    clearError,
+    watch,
+    handleSubmit,
+  } = useForm<{
+    cpf: string;
+  }>();
+  const cpf = watch('cpf') as string;
+  const hasCpf = cpf && cpf.length;
 
   const submit = () => {
-    if (!hasUsername) {
-      usernameInput.current!.focus();
-      return;
-    }
-    onSubmit(username);
+    onSubmit(cpf);
   };
 
   return (
@@ -47,13 +53,25 @@ function LoginTemplate({ onSubmit, loading }: LoginTemplateProps) {
             <Title>Digite seu CPF para começar</Title>
             <Input
               style={{ marginTop: 50 }}
-              value={username}
+              value={cpf}
               autoCapitalize="none"
-              onChangeText={text => setUsername(text)}
+              onChangeText={text => {
+                setValue('cpf', text);
+                clearError();
+              }}
               placeholder="000.000.000-00"
               type="cpf"
               onSubmitEditing={submit}
-              innerref={usernameInput}
+              error={errors && errors.cpf && errors.cpf.message}
+              innerref={register(
+                { name: 'cpf' },
+                {
+                  pattern: {
+                    value: /\d{3}.\d{3}.\d{3}-\d{2}/,
+                    message: 'Digite o CPF no padrão correto',
+                  },
+                },
+              )}
             />
             <View
               style={{
@@ -63,8 +81,8 @@ function LoginTemplate({ onSubmit, loading }: LoginTemplateProps) {
               }}>
               <Button
                 icon={'arrow-forward'}
-                onPress={submit}
-                disabled={!hasUsername}
+                onPress={handleSubmit(submit)}
+                disabled={!hasCpf}
               />
             </View>
           </View>
@@ -79,7 +97,7 @@ function LoginTemplate({ onSubmit, loading }: LoginTemplateProps) {
 
 LoginTemplate.defaultProps = {
   loading: false,
-  onSubmit(username: string) {},
+  onSubmit(cpf: string) {},
 } as Partial<LoginTemplateProps>;
 
 export default LoginTemplate;
