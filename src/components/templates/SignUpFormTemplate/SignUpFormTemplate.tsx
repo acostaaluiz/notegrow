@@ -51,7 +51,7 @@ function SignUpFormTemplate({
     clearError,
   } = useForm<FormType>();
 
-  const fullname = watch('cnh') as string;
+  const fullname = watch('fullname') as string;
   const birthday = watch('birthday') as Date;
   const cnh = watch('cnh') as string;
 
@@ -82,6 +82,7 @@ function SignUpFormTemplate({
               placeholder="Seu nome completo"
               textContentType="name"
               containerStyle={{ marginVertical: 11 }}
+              value={fullname}
               innerref={register(
                 { name: 'fullname' },
                 {
