@@ -10,7 +10,7 @@ export function loginExists(username: string) {
 
   // TODO: REMOVE
   // debug
-  if (username === '0') {
+  if (username === '00000000000') {
     return API.get(`motoristas/cpf/08015505992/existe`);
   }
   return API.get(`motoristas/cpf/${username}/existe`);

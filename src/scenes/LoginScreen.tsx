@@ -29,6 +29,7 @@ function LoginScreen({ navigation }: LoginScreen) {
         setLoading(false);
         navigation.navigate('SignUp');
       });
+
     Keyboard.dismiss();
   };
 

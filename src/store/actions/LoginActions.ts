@@ -56,24 +56,28 @@ export function savePreferences(dispatch: Dispatch) {
   };
 }
 
+export function doLoginMock(dispatch: Dispatch) {
+  return async (userName: string, password: string) => {
+    dispatch(loginFetchPending());
+  };
+}
+
 export function doLoginService(dispatch: Dispatch) {
   return async (userName: string, password: string) => {
     dispatch(loginFetchPending());
 
-    const data = await loginMockError(userName, password);
+    const loginServer = password === 'abc123' ? loginMock : loginMockError;
+
+    const data = await loginServer(userName, password);
 
     if (data.error == 'invalid_grant') {
       const errorModel = ErrorModel(data);
-      console.log('errorModel: ' + JSON.stringify(errorModel));
-      if (errorModel) dispatch(loginFetchError(errorModel));
+      if (errorModel) {
+        dispatch(loginFetchError(errorModel));
+      }
     } else {
       const loginModel = LoginModel(data);
-
-      if (loginModel) {
-        dispatch(loginFetchSuccess(loginModel));
-      } else {
-        // ...
-      }
+      dispatch(loginFetchSuccess(loginModel!));
     }
   };
 }

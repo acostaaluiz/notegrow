@@ -1,9 +1,18 @@
 import React, { useState, useRef } from 'react';
-import { View, TextInput } from 'react-native';
+import {
+  View,
+  TextInput,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from 'react-native';
 import { WhiteBackground, Title } from './LoginTemplatePassword.styled';
-import { Input, Button, Image, StatusBarComponent } from '../../atoms';
-import { ErrorInterface } from '../../../models/error';
-import dataChecker from '../../../utils/dataChecker';
+import {
+  Input,
+  Button,
+  Image,
+  StatusBarComponent,
+  LoadingModal,
+} from '../../atoms';
 
 interface LoginTemplatePasswordProps {
   pending: boolean;
@@ -17,11 +26,11 @@ function LoginPasswordTemplate({
   onSubmit,
 }: LoginTemplatePasswordProps) {
   const [password, setPassword] = useState('');
-  const usernameInput = useRef<TextInput>();
   const passwordInput = useRef<TextInput>();
+  const hasPassword = password && password.length;
 
   const submit = () => {
-    if (!password || (password && !password.length)) {
+    if (!hasPassword) {
       passwordInput.current!.focus();
       return;
     }
@@ -31,30 +40,40 @@ function LoginPasswordTemplate({
   return (
     <>
       <StatusBarComponent />
-      <WhiteBackground>
-        <View>
-          <Image width="56px" height="16px" name="logo" />
-          <Title>Digite sua senha</Title>
-          <Input
-            style={{ marginTop: 50 }}
-            value={password}
-            autoCapitalize="none"
-            autoFocus
-            onChangeText={text => setPassword(text)}
-            placeholder="senha"
-            onSubmitEditing={submit}
-            innerref={usernameInput}
-            textContentType="password"
-            secureTextEntry
-            error={error}
-          />
-          <Button
-            style={{ marginTop: 36, marginBottom: 300, alignSelf: 'flex-end' }}
-            icon={'arrow-forward'}
-            onPress={submit}
-          />
-        </View>
-      </WhiteBackground>
+      {pending && <LoadingModal />}
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+        <WhiteBackground>
+          <View>
+            <Image width="56px" height="16px" name="logo" />
+            <Title>Digite sua senha</Title>
+            <Input
+              containerStyle={{ marginTop: 50 }}
+              value={password}
+              autoCapitalize="none"
+              autoFocus
+              onChangeText={text => setPassword(text)}
+              placeholder="senha"
+              onSubmitEditing={submit}
+              innerref={passwordInput}
+              textContentType="password"
+              secureTextEntry
+              error={error}
+            />
+            <View
+              style={{
+                marginTop: 36,
+                justifyContent: 'flex-end',
+                alignItems: 'flex-end',
+              }}>
+              <Button
+                icon="arrow-forward"
+                disabled={!hasPassword}
+                onPress={submit}
+              />
+            </View>
+          </View>
+        </WhiteBackground>
+      </TouchableWithoutFeedback>
     </>
   );
 }
