@@ -21,9 +21,36 @@ const API = {
       return _response.status;
   },
 
-  get(endpoint: string): Promise<any> {
+  get(endpoint: string, headersProp?: Headers | string[][] | Record<string, string>): Promise<any> {
+
+    let headers = {
+    };
+
+    if (headersProp) {
+      headers = { ...headers, ...headersProp };
+    }
+
     return fetch(`${this.url}/${endpoint}`, {
       method: 'GET',
+      headers
+    })
+      .then(this._handleError)
+      .then(this._handleContentType)
+      .catch((error) => { throw new Error(error); });
+  },
+
+  getMock(endpoint: string, headersProp?: Headers | string[][] | Record<string, string>): Promise<any> {
+
+    let headers = {
+    };
+
+    if (headersProp) {
+      headers = { ...headers, ...headersProp };
+    }
+
+    return fetch(`${this.urlMock}/${endpoint}`, {
+      method: 'GET',
+      headers
     })
       .then(this._handleError)
       .then(this._handleContentType)
@@ -34,16 +61,15 @@ const API = {
     const _body = JSON.stringify(body);
 
     let headers = {
-      'Content-Type': 'application/json'
     };
 
     if (headersProp) {
       headers = { ...headers, ...headersProp };
     }
 
-    console.log(this.urlMock + '/' + endpoint);
+    console.log(this.url + '/' + endpoint);
 
-    return fetch(`${this.urlMock}/${endpoint}`, {
+    return fetch(`${this.url}/${endpoint}`, {
       method: 'POST',
       headers,
       body: _body

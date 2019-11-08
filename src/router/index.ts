@@ -44,6 +44,9 @@ const LoginNavigator = createStackNavigator({
   Login: {
     screen: LoginScreen,
   },
+  LoginPassword: {
+    screen: LoginPasswordScreen
+  },
   SignUp: SignUpNavigation
 }, {
   initialRouteName: 'Login',
@@ -61,6 +64,6 @@ const AppNavigator = createSwitchNavigator({
   Login: LoginNavigator,
   Home: HomeNavigator,
   FAQ: FAQNavigator
-}, { initialRouteName: 'AppOpened' });
+}, { initialRouteName: 'Login' });
 
 export default createAppContainer(AppNavigator);

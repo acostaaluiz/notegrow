@@ -2,13 +2,16 @@ import React, { useState, useRef } from 'react';
 import { View, TextInput } from 'react-native';
 import { WhiteBackground, Title } from './LoginTemplatePassword.styled';
 import { Input, Button, Image, StatusBarComponent } from '../../atoms';
+import { ErrorInterface } from '../../../models/error';
+import dataChecker from '../../../utils/dataChecker';
 
 interface LoginTemplatePasswordProps {
     pending: boolean;
+    error?: string;
     onSubmit: (password: string) => void;
 }
 
-function LoginPasswordTemplate({ pending, onSubmit }: LoginTemplatePasswordProps) {
+function LoginPasswordTemplate({ pending, error, onSubmit }: LoginTemplatePasswordProps) {
     const [password, setPassword] = useState('');
     const usernameInput = useRef<TextInput>();
     const passwordInput = useRef<TextInput>();
@@ -39,6 +42,8 @@ function LoginPasswordTemplate({ pending, onSubmit }: LoginTemplatePasswordProps
                         innerref={usernameInput}
                         textContentType="password"
                         secureTextEntry
+                        assistiveText={error}
+                        error={true}
                     />
                     <Button
                         style={{ marginTop: 36, marginBottom: 300, alignSelf: "flex-end" }}
