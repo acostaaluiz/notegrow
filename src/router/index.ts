@@ -33,20 +33,13 @@ const SignUpNavigation = createStackNavigator({
   ...noHeader
 })
 
-
-const LoginStackNavigator = createStackNavigator({
-  LoginDocument: LoginScreen,
-  LoginPassword: LoginPasswordScreen,
-}, {
-  initialRouteName: 'LoginDocument',
-  ...noHeader
-});
-
 const LoginNavigator = createStackNavigator({
-  Login: LoginStackNavigator,
+  Login: {
+    screen: LoginScreen,
+  },
   SignUp: SignUpNavigation
 }, {
-  initialRouteName: 'Login',
+  initialRouteName: 'SignUp',
   ...noHeader
 });
 

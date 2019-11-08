@@ -4,4 +4,5 @@ export { default as Button } from './Button'
 export { default as Image } from './Image'
 export { default as StatusBarComponent } from './StatusBarComponent'
 export { default as CloseKeyboard } from './CloseKeyboard'
+export { default as BackButton } from './BackButton'
 

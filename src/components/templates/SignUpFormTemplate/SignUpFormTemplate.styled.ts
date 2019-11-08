@@ -4,15 +4,22 @@ import colors from "../../../styles/colors";
 
 export const Page = styled.View`
   flex: 1;
-  padding: 20px 28px;
+  padding: 34px 28px 20px;
   justify-content: flex-end;
-  background-color: red;
+  position: relative;
+`;
+
+export const ImageContainer = styled.View`
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: -100;
 `;
 
 export const Title = styled.Text`
   ${styledfont.h3}
   color: ${colors.blue.primary};
   width: 72%;
-  margin-bottom: 36px;
-  margin-top: 136px;
+  margin-bottom: 68px;
+  margin-top: 100px;
 `;

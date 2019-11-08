@@ -12,7 +12,9 @@ function SignUpFormScreen({ navigation }: SignUpFormScreenScreenProps) {
   return (
     <>
       <StatusBarComponent />
-      <SignUpFormTemplate />
+      <SignUpFormTemplate
+        onPressBack={() => navigation.navigate('SignUpBlue')}
+      />
     </>
   );
 }
