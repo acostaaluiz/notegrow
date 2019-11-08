@@ -5,12 +5,11 @@ import { Input, Button, Image, StatusBarComponent } from '../../atoms';
 
 
 interface LoginTemplateProps {
-  onSubmit: (username: string, password: string) => void;
+  onSubmit: (username: string) => void;
 }
 
 function LoginTemplate({ onSubmit }: LoginTemplateProps) {
   const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
   const usernameInput = useRef<TextInput>();
 
   const submit = () => {
@@ -18,7 +17,7 @@ function LoginTemplate({ onSubmit }: LoginTemplateProps) {
       usernameInput.current!.focus();
       return;
     }
-    onSubmit(username, password);
+    onSubmit(username);
   };
 
   return (

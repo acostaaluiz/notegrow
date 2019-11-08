@@ -3,7 +3,7 @@ import { Keyboard, Text } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavigationPageProp } from '../interfaces/navigation';
 import { AppState } from '../store/reducers';
-import { doLoginService } from '../store/actions/LoginActions';
+import { checkDocument } from '../store/actions/LoginActions';
 import { LoginTemplate } from '../components/templates';
 
 interface LoginScreen {
@@ -11,18 +11,18 @@ interface LoginScreen {
 }
 
 function LoginScreen({ navigation }: LoginScreen) {
-  const { pending, data } = useSelector(({ login }: AppState) => login);
+  const { data } = useSelector(({ login }: AppState) => login);
   const dispatch = useDispatch();
-  const requestLogin = doLoginService(dispatch);
+  const checkLogin = checkDocument(dispatch);
 
-  const onSubmit = (username: string, password: string) => {
-    requestLogin('teste', 'test');
+  const onSubmit = (username: string) => {
+    checkLogin(username);
     Keyboard.dismiss();
   };
 
   useEffect(() => {
-    if (data) {
-      navigation.navigate('Home');
+    if (data && data.userName) {
+      navigation.navigate('LoginPassword', { document: data.userName });
     }
   }, [data]);
 

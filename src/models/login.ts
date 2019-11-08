@@ -5,6 +5,7 @@ export interface LoginInterface {
     expires_in: Number;
     userName: string;
     password: string;
+    checkedUser: boolean;
 
 }
 
@@ -16,6 +17,7 @@ export default function LoginModel(data: any | LoginInterface): LoginInterface |
         token_type: data.token_type || '',
         expires_in: data.expires_in || '',
         userName: data.userName || '',
-        password: data.password || ''
+        password: data.password || '',
+        checkedUser: data.checkedUser || false
     }
 }

@@ -12,7 +12,7 @@ function loginFetchPending() {
   return { type: LOGIN_FETCH_PENDING }
 }
 
-function loginFetchSuccess(login: LoginInterface) {
+function loginFetchSuccess(login: Partial<LoginInterface>) {
   return {
     type: LOGIN_FETCH_SUCCESS,
     payload: login
@@ -32,27 +32,12 @@ export function savePreferences(dispatch: Dispatch) {
   }
 }
 
-export function doLogin(dispatch: Dispatch) {
-  return async (userName: string) => {
-    dispatch(loginFetchPending())
-
-    const data = getLoginObj(userName);
-    const loginModel = LoginModel(data);
-
-    if (loginModel) {
-      dispatch(loginFetchSuccess(loginModel))
-    }
-    else {
-      // ...
-    }
-  }
-}
-
 export function doLoginService(dispatch: Dispatch) {
   return async (userName: string, password: string) => {
     dispatch(loginFetchPending())
-
+    console.log('loguei');
     const data = await login(userName, password);
+    console.log('login: ' + JSON.stringify(data));
     const loginModel = LoginModel(data);
 
     if (loginModel) {
@@ -68,17 +53,22 @@ export function checkDocument(dispatch: Dispatch) {
   return async (userName: string) => {
     dispatch(loginFetchPending())
 
-    console.log(userName);
     const data = await loginExists(userName);
+    let access;
 
-    console.log('alou: ' + JSON.stringify(data));
+    if (data == '200')
+      access = true;
+    else
+      access = false;
 
-    /*if (loginModel) {
+    const loginModel = getLoginObj(userName, access);
+
+    if (loginModel) {
       dispatch(loginFetchSuccess(loginModel))
     }
     else {
       // ...
-    }*/
+    }
   }
 }
 
@@ -86,9 +76,10 @@ export function doLogoff(dispatch: Dispatch) {
   dispatch(logoff())
 }
 
-function getLoginObj(userName: string): Partial<LoginInterface> {
+function getLoginObj(userName: string, access: boolean): Partial<LoginInterface> {
   return {
-    userName: userName
+    userName: userName,
+    checkedUser: access
   }
 }
 

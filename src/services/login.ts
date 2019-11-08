@@ -9,7 +9,7 @@ export function loginExists(user: string) {
         'Content-Type': 'application/json'
     });
 
-    return API.get('motoristas/cpf/' + user, 'existe');
+    return API.get('motoristas/cpf/08015505992/existe');
 }
 
 export function login(user: string, password: string) {
@@ -21,5 +21,5 @@ export function login(user: string, password: string) {
         'Content-Type': 'application/json'
     });
 
-    return API.post('login', { user, password }, headers);
+    return API.post('login', { user, password });
 }

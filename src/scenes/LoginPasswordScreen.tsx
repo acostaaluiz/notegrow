@@ -1,32 +1,32 @@
 import React, { useEffect } from 'react';
-import { Keyboard, Text } from 'react-native';
+import { Keyboard } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavigationPageProp } from '../interfaces/navigation';
 import { AppState } from '../store/reducers';
 import { doLoginService } from '../store/actions/LoginActions';
 import { LoginPasswordTemplate } from '../components/templates';
 
-interface LoginScreen {
+interface LoginPasswordScreen {
     navigation: NavigationPageProp;
 }
 
-function LoginPasswordScreen({ navigation }: LoginScreen) {
+function LoginPasswordScreen({ navigation }: LoginPasswordScreen) {
     const { pending, data } = useSelector(({ login }: AppState) => login);
     const dispatch = useDispatch();
     const requestLogin = doLoginService(dispatch);
 
     const onSubmit = (password: string) => {
+
         const document = navigation.getParam('document');
+        console.log('document' + document);
         requestLogin(document, password);
 
         Keyboard.dismiss();
-
-        console.log('document: ' + document);
     };
 
     useEffect(() => {
-        if (data) {
-            console.log('data: ' + JSON.stringify(data));
+        console.log('****************: ' + JSON.stringify(data));
+        if (data && data.access_token && data.access_token.lenght) {
             navigation.navigate('Home');
         }
     }, [data]);
