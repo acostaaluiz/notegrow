@@ -14,7 +14,7 @@ function SignUpFormScreen({ navigation }: SignUpFormScreenScreenProps) {
   const onSubmit = () => {
     setLoading(true);
     setTimeout(() => {
-      navigation.navigate('SignUpBlue');
+      navigation.navigate('SignUpPassword');
     }, 1000);
   };
   return (

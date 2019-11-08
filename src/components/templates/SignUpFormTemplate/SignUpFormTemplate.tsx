@@ -15,10 +15,10 @@ import DatePickerModal from '../../molecules/DatePickerModal';
 interface SignUpFormTemplateProps {
   loading: boolean;
   onPressBack: () => void;
-  onSubmit: () => void;
+  onSubmit: (data?: FormType) => void;
 }
 
-interface FormType {
+export interface FormType {
   name: string;
   birthday: Date;
   cnh: string;
