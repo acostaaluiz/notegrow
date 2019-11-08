@@ -174,7 +174,7 @@ function SignUpFormTemplate({ onPressBack }: SignUpFormTemplateProps) {
 }
 
 SignUpFormTemplate.defaultProps = {
-  onPressBack() {},
+  onPressBack() { },
 } as Partial<SignUpFormTemplateProps>;
 
 export default SignUpFormTemplate;

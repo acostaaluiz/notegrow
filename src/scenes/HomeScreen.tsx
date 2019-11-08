@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from '../store/reducers';
 import { NavigationPageProp } from '../interfaces/navigation';
-import { logoffUser } from '../store/actions/UserActions';
+import { doLogoff } from '../store/actions/LoginActions';
 import { HomeTemplate } from '../components/templates';
 import { AuthGuard } from '../components/utils';
 interface HomeScreenProps {
@@ -10,15 +10,15 @@ interface HomeScreenProps {
 }
 
 function HomeScreen({ navigation }: HomeScreenProps) {
-  const user = useSelector(({ user }: AppState) => user.data);
+  const login = useSelector(({ login }: AppState) => login.data);
   const dispatch = useDispatch();
-  const onLogoff = () => logoffUser(dispatch);
+  const onLogoff = () => doLogoff(dispatch);
 
   return (
     <AuthGuard navigation={navigation}>
       <HomeTemplate
         pageName={(navigation.state as any).routeName}
-        user={user!}
+        login={login!}
         onLogoff={onLogoff}
       />
     </AuthGuard>

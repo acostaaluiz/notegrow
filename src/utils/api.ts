@@ -1,8 +1,9 @@
 import Config from 'react-native-config';
-const { SERVER_URL } = Config;
+const { SERVER_URL, SERVER_MOCK } = Config;
 
 const API = {
   url: SERVER_URL,
+  urlMock: SERVER_MOCK,
 
   _handleError(_res: Response) {
     return _res.ok ? _res : Promise.reject(_res.statusText);
@@ -14,20 +15,15 @@ const API = {
   _handleContentType(_response: Response) {
     const contentType = _response.headers.get('content-type');
 
-    if (contentType && contentType.includes('application/json')) {
+    if (contentType && contentType.includes('application/json'))
       return _response.json();
-    }
-
-    return Promise.reject('Oops, we haven\'t got JSON!');
+    else
+      return _response.status;
   },
 
   get(endpoint: string): Promise<any> {
     return fetch(`${this.url}/${endpoint}`, {
       method: 'GET',
-      // eslint-disable-next-line no-undef
-      headers: new Headers({
-        Accept: 'application/json'
-      })
     })
       .then(this._handleError)
       .then(this._handleContentType)
@@ -37,12 +33,17 @@ const API = {
   post<T>(endpoint: string, body: T, headersProp?: Headers | string[][] | Record<string, string>): Promise<any> {
     const _body = JSON.stringify(body);
 
-    let headers = { 'Content-Type': 'application/json' };
+    let headers = {
+      'Content-Type': 'application/json'
+    };
+
     if (headersProp) {
       headers = { ...headers, ...headersProp };
     }
 
-    return fetch(`${this.url}/${endpoint}`, {
+    console.log(this.urlMock + '/' + endpoint);
+
+    return fetch(`${this.urlMock}/${endpoint}`, {
       method: 'POST',
       headers,
       body: _body

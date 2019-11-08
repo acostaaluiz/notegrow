@@ -102,18 +102,18 @@ function Input({
             secureTextEntry={hidingPassword}
           />
         ) : (
-          <StyledInput
-            ref={innerref as any}
-            {...props}
-            style={overloadStyle}
-            onChangeText={OnChangeProp}
-            onFocus={onFocusProp}
-            onBlur={onBlurProp}
-            editable={editable}
-            placeholderTextColor={colors.black.inactive}
-            secureTextEntry={hidingPassword}
-          />
-        )}
+            <StyledInput
+              ref={innerref as any}
+              {...props}
+              style={overloadStyle}
+              onChangeText={OnChangeProp}
+              onFocus={onFocusProp}
+              onBlur={onBlurProp}
+              editable={editable}
+              placeholderTextColor={colors.black.inactive}
+              secureTextEntry={hidingPassword}
+            />
+          )}
 
         {assistiveText || error ? (
           <StyledText style={assistiveTextStyle}>

@@ -1,7 +1,7 @@
-import * as UserActions from './UserActions';
+import * as LoginActions from './LoginActions';
 import * as PreferencesActions from './PreferencesActions';
 
 export default {
-  ...UserActions,
+  ...LoginActions,
   ...PreferencesActions,
 };
