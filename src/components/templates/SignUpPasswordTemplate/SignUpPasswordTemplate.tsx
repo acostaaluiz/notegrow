@@ -15,7 +15,7 @@ interface SignUpPasswordTemplateProps {
   onSubmit: (data: { password: string }) => void;
 }
 
-function SignUpPasswordTemplate({  }: SignUpPasswordTemplateProps) {
+function SignUpPasswordTemplate({ onSubmit }: SignUpPasswordTemplateProps) {
   const {
     register,
     handleSubmit,
@@ -23,8 +23,8 @@ function SignUpPasswordTemplate({  }: SignUpPasswordTemplateProps) {
     watch,
     errors,
     clearError,
-  } = useForm();
-  const password = watch('password');
+  } = useForm<{ password: string }>();
+  const password = watch('password') as string;
   const disabled =
     !password ||
     (password && !password.length) ||
@@ -74,9 +74,7 @@ function SignUpPasswordTemplate({  }: SignUpPasswordTemplateProps) {
               disabled={disabled}
               inline
               icon="arrow-forward"
-              onPress={handleSubmit(data =>
-                Alert.alert('Alerta', JSON.stringify(data)),
-              )}
+              onPress={handleSubmit(onSubmit)}
             />
           </View>
           <View style={{ flex: 1 }} />

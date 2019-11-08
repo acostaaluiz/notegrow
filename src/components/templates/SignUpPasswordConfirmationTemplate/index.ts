@@ -1,0 +1,2 @@
+import SignUpPasswordConfirmationTemplate from './SignUpPasswordConfirmationTemplate';
+export default SignUpPasswordConfirmationTemplate;

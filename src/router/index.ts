@@ -11,6 +11,8 @@ import SignUpBlueScreen from '../scenes/SignUpBlueScreen';
 import SignUpFormScreen from '../scenes/SignUpFormScreenScreen';
 import { noHeader } from './configurations';
 import SignUpPasswordScreen from '../scenes/SignUpPasswordScreen';
+import SignUpPasswordConfirmationScreen from '../scenes/SignUpPasswordConfirmationScreen';
+import SignUpCompleteScreen from '../scenes/SignUpCompleteScreen';
 
 const HomeNavigator = createBottomTabNavigator({
   Home: {
@@ -28,11 +30,13 @@ const HomeNavigator = createBottomTabNavigator({
 }, { initialRouteName: 'Home' })
 
 const SignUpNavigation = createStackNavigator({
-  SignUpBlue: SignUpBlueScreen,
+  SignUp: SignUpBlueScreen,
   SignUpForm: SignUpFormScreen,
   SignUpPassword: SignUpPasswordScreen,
+  SignUpPasswordConfirmation: SignUpPasswordConfirmationScreen,
+  SignUpComplete: SignUpCompleteScreen,
 }, {
-  initialRouteName: 'SignUpPassword',
+  initialRouteName: 'SignUp',
   ...noHeader
 })
 

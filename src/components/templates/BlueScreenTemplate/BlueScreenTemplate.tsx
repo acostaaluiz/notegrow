@@ -11,7 +11,7 @@ import { View } from 'react-native';
 
 interface BlueScreenTemplateProps {
   title: string;
-  text: string;
+  text?: string;
   buttonText: string;
   onPress: () => void;
 }
@@ -33,7 +33,7 @@ function BlueScreenTemplate({
           <View>
             <Image width="56px" height="16px" name="logo-white" />
             <Title>{title}</Title>
-            <Text>{text}</Text>
+            {text ? <Text>{text}</Text> : null}
           </View>
           <Button title={buttonText} onPress={onPress} />
         </BlueBackground>
@@ -44,7 +44,6 @@ function BlueScreenTemplate({
 
 BlueScreenTemplate.defaultProps = {
   title: 'Hello',
-  text: 'Hello World',
   buttonText: 'Hello World',
 } as Partial<BlueScreenTemplateProps>;
 

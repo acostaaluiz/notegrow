@@ -5,4 +5,5 @@ export { default as FAQTemplate } from './FAQTemplate'
 export { default as BlueScreenTemplate } from './BlueScreenTemplate'
 export { default as SignUpFormTemplate } from './SignUpFormTemplate'
 export { default as SignUpPasswordTemplate } from './SignUpPasswordTemplate'
+export { default as SignUpPasswordConfirmationTemplate } from './SignUpPasswordConfirmationTemplate'
 
